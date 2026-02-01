@@ -68,3 +68,12 @@
     }
   }
 }
+
+@layer utilities {
+  .scanline-bg {
+    background: repeating-linear-gradient(
+  rgba(0, 255, 128, 0.08) 0 1px,
+    transparent 1px 3px
+  );
+  }
+}

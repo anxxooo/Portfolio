@@ -6,7 +6,11 @@ interface AboutProps {
 
 function About({ lang }: AboutProps) {
   return (
-    <section className="relative bg-[#0b0c10] min-h-screen flex items-center justify-center p-8">
+    <section className="relative w-full min-h-screen flex items-center justify-center p-8 bg-gradient-to-br from-[#0b0c10] via-[#111218] to-[#1c1f26] overflow-hidden">
+    <div className="absolute top-0 left-0 w-full h-24 bg-gradient-to-b from-[#0b0c10] to-transparent pointer-events-none"></div>
+    <div className="absolute inset-0 bg-gradient-to-r from-green-500 via-blue-500 to-purple-500 opacity-10 animate-pulse-slow pointer-events-none"></div>
+    <div className="absolute bottom-0 left-0 w-full h-24 bg-gradient-to-t from-[#0b0c10] to-transparent pointer-events-none"></div>
+    
     <div className="w-full max-w-6xl mx-0  my-10 px-6">
 
     <h2 className="mx-20 text-3xl md:text-6xl font-mono font-bold text-white text-center md:text-left">

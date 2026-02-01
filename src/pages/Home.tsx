@@ -11,7 +11,7 @@ function Home({ lang }: HomeProps) {
       <Glitch text="Malak TOUAT"/>
       <div className="space-x-6 text-sm items-center my-10">
 
-      <p className="text-lg md:text-xl text-gray-400 max-w-2xl mb-8">
+      <p className="text-lg md:text-xl text-gray-400 max-w-2xl mb-0">
         {lang === "en"
           ? "Exploring cybersecurity, systems, and DevOps with curiosity and rigor."
           : "Interessée par la cybersécurité, aux systèmes et au DevOps avec curiosité et rigueur."}
