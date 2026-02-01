@@ -1,15 +1,18 @@
 import { useRef, useState } from "react";
 import Navbar from "./components/layouts/Navbar.tsx";
+import Footer from "./components/layouts/Footer.tsx";
 import Home from "./pages/Home.tsx";
 import Projects from "./pages/Projects.tsx";
 import Contact from "./pages/Contact.tsx";
 import About from "./pages/About.tsx";
+import Skills from "./pages/Skills.tsx";
 
 export default function App() {
   const homeRef = useRef<HTMLElement>(null);
   const projectsRef = useRef<HTMLElement>(null);
   const contactRef = useRef<HTMLElement>(null);
   const aboutRef = useRef<HTMLElement>(null);
+  const skillsRef = useRef<HTMLElement>(null);
 
   const [lang, setLang] = useState<"en" | "fr">("en");
   const toggleLanguage = () => {
@@ -19,7 +22,7 @@ export default function App() {
   return (
     <div className="font-mono bg-[#0b0c10] text-gray-200 min-h-screen">
       <Navbar
-        refs={{ homeRef, projectsRef, contactRef, aboutRef }}
+        refs={{ homeRef, projectsRef, skillsRef, contactRef, aboutRef }}
         lang={lang}
         toggleLanguage={toggleLanguage}
       />
@@ -32,13 +35,19 @@ export default function App() {
         <About lang={lang} />
       </section>
 
+      <section ref={skillsRef}  >
+        <Skills lang={lang}/>
+      </section>
+
       <section ref={projectsRef} lang={lang} >
         <Projects />
       </section>
 
-      <section ref={contactRef} lang={lang} >
-        <Contact />
+      <section ref={contactRef}  >
+        <Contact lang={lang}/>
       </section>
+
+      <Footer/>
     </div>
   );
 }

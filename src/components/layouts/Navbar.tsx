@@ -9,6 +9,7 @@ interface NavbarProps {
     projectsRef: React.RefObject<HTMLElement | null>;
     contactRef: React.RefObject<HTMLElement | null>;
     aboutRef: React.RefObject<HTMLElement | null>;
+    skillsRef: React.RefObject<HTMLElement | null>;
   };
   lang: "en" | "fr";
   toggleLanguage: () => void;
@@ -24,16 +25,19 @@ function Navbar({ refs, lang, toggleLanguage}: NavbarProps) {
     <nav className="w-full px-8 py-4 flex justify-between items-center border-b border-gray-800 fixed top-0 bg-gray-950 z-50">
       <span className="text-xl font-bold"></span>
       <div className="hidden md:flex space-x-6 text-sm items-center">
-        <button onClick={() => scrollTo(refs.homeRef)} className="text-xl font-semibold px-3 py-1 rounded hover:text-blue-400 cursor-pointer transition-colors duration-300">
+        <button onClick={() => scrollTo(refs.homeRef)} className="text-xl font-semibold px-3 py-1 rounded hover:text-green-400 cursor-pointer transition-colors duration-300">
           {lang === "en" ? "Home" : "Accueil"}
         </button>
-        <button onClick={() => scrollTo(refs.aboutRef)} className="text-xl font-semibold px-3 py-1 rounded hover:text-blue-400 cursor-pointer transition-colors duration-300">
+        <button onClick={() => scrollTo(refs.aboutRef)} className="text-xl font-semibold px-3 py-1 rounded hover:text-green-400 cursor-pointer transition-colors duration-300">
           {lang === "en" ? "About me" : "À propos"}
         </button>
-        <button onClick={() => scrollTo(refs.projectsRef)} className="text-xl font-semibold px-3 py-1 rounded hover:text-blue-400 cursor-pointer transition-colors duration-300">
+        <button onClick={() => scrollTo(refs.skillsRef)} className="text-xl font-semibold px-3 py-1 rounded hover:text-green-400 cursor-pointer transition-colors duration-300">
+          {lang === "en" ? "Skills" : "Compétences"}
+        </button>
+        <button onClick={() => scrollTo(refs.projectsRef)} className="text-xl font-semibold px-3 py-1 rounded hover:text-green-400 cursor-pointer transition-colors duration-300">
           {lang === "en" ? "Projects" : "Projets"}
         </button>
-        <button onClick={() => scrollTo(refs.contactRef)} className="text-xl font-semibold  py-1 rounded hover:text-blue-400 cursor-pointer transition-colors duration-300">
+        <button onClick={() => scrollTo(refs.contactRef)} className="text-xl font-semibold  py-1 rounded hover:text-green-400 cursor-pointer transition-colors duration-300">
           {lang === "en" ? "Contact" : "Contact"}
         </button>
         <button
@@ -71,25 +75,28 @@ function Navbar({ refs, lang, toggleLanguage}: NavbarProps) {
         <div className="absolute top-full right-0 w-48 bg-gray-950 border border-gray-800 rounded mt-2  flex flex-col items-start p-2 space-y-2 md:hidden">
           <button
             onClick={() => scrollTo(refs.homeRef)}
-            className="w-full text-left font-semibold px-3 py-1 rounded hover:text-blue-400 cursor-pointer transition-colors duration-300"
+            className="w-full text-left font-semibold px-3 py-1 rounded hover:text-green-400 cursor-pointer transition-colors duration-300"
           >
             {lang === "en" ? "Home" : "Accueil"}
           </button>
           <button
             onClick={() => scrollTo(refs.aboutRef)}
-            className="w-full text-left font-semibold px-3 py-1 rounded hover:text-blue-400 cursor-pointer transition-colors duration-300"
+            className="w-full text-left font-semibold px-3 py-1 rounded hover:text-green-400 cursor-pointer transition-colors duration-300"
           >
-            {lang === "en" ? "About me" : "A propos"}
+            {lang === "en" ? "About me" : "À propos"}
+          </button>
+          <button onClick={() => scrollTo(refs.skillsRef)} className="w-full text-left font-semibold px-3 py-1 rounded hover:text-green-400 cursor-pointer transition-colors duration-300">
+          {lang === "en" ? "Skills" : "Compétences"}
           </button>
           <button
             onClick={() => scrollTo(refs.projectsRef)}
-            className="w-full text-left font-semibold px-3 py-1 rounded hover:text-blue-400 cursor-pointer transition-colors duration-300"
+            className="w-full text-left font-semibold px-3 py-1 rounded hover:text-green-400 cursor-pointer transition-colors duration-300"
           >
             {lang === "en" ? "Projects" : "Projets"}
           </button>
           <button
             onClick={() => scrollTo(refs.contactRef)}
-            className="w-full text-left font-semibold px-3 py-1 rounded hover:text-blue-400 cursor-pointer transition-colors duration-300"
+            className="w-full text-left font-semibold px-3 py-1 rounded hover:text-green-400 cursor-pointer transition-colors duration-300"
           >
             {lang === "en" ? "Contact" : "Contact"}
           </button>
