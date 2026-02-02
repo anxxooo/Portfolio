@@ -12,7 +12,7 @@ function Skills({ lang }: SkillsProps) {
   <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
     <div className="bg-[#111218] rounded-xl p-6 shadow-[0_0_0_1px_rgba(0,255,128,0.12),0_10px_25px_rgba(0,0,0,0.85)] hover:scale-105 transition-transform">
       <h3 className="text-xl font-semibold text-green-400 mb-2 flex items-center gap-2">
-        Cybersécurité
+        {lang === "en" ? "Cybersecurity" : "Cybersécurité"}
       </h3>
       <p className="text-gray-300 text-sm">
         {lang === "en" ? "Strong knowledge of cybersecurity concepts, cryptography, and best practices for authentication and access control. Familiarity with permission management, firewalls, and threat detection. Understanding of vulnerabilities, common threats, and mitigation strategies." 
@@ -32,7 +32,7 @@ function Skills({ lang }: SkillsProps) {
 
     <div className="bg-[#111218] rounded-xl p-6 shadow-[0_0_0_1px_rgba(0,255,128,0.12),0_10px_25px_rgba(0,0,0,0.85)] hover:scale-105 transition-transform">
       <h3 className="text-xl font-semibold text-purple-400 mb-2 flex items-center gap-2">
-        Systèmes
+        {lang === "en" ? "Systems" : "Systèmes"}
       </h3>
       <p className="text-gray-300 text-sm">
         {lang === "en" ? "Solid foundation in Linux administration across various distributions (Ubuntu, Debian, RHEL), including user, group, and permission management. Familiarity with package management, system monitoring, and performance supervision. Understanding of partitions, file systems, and storage management."
@@ -42,7 +42,7 @@ function Skills({ lang }: SkillsProps) {
 
     <div className="bg-[#111218] rounded-xl p-6 shadow-[0_0_0_1px_rgba(0,255,128,0.12),0_10px_25px_rgba(0,0,0,0.85)] hover:scale-105 transition-transform">
       <h3 className="text-xl font-semibold text-yellow-400 mb-2 flex items-center gap-2">
-        Réseaux
+        {lang === "en" ? "Networks" : "Réseaux"}
       </h3>
       <p className="text-gray-300 text-sm">
          {lang === "en" ? "Linux network administration and configuration, including management of IP addresses, routes, and interfaces. Knowledge of TCP/IP, SSH, FTP, and NAT protocols, as well as network security and segmentation concepts. Familiarity with network analysis and diagnostic tools such as Wireshark, Nmap, tcpdump, and firewall configuration (iptables, firewalld)." 
@@ -52,11 +52,11 @@ function Skills({ lang }: SkillsProps) {
 
     <div className="bg-[#111218] rounded-xl p-6 shadow-[0_0_0_1px_rgba(0,255,128,0.12),0_10px_25px_rgba(0,0,0,0.85)] hover:scale-105 transition-transform">
       <h3 className="text-xl font-semibold text-red-400 mb-2 flex items-center gap-2">
-        Développement
+        {lang === "en" ? "Development" : "Développement"}
       </h3>
       <p className="text-gray-300 text-sm">
-        {lang === "en" ? "Development with Python, Java, and full-stack frameworks (Django, Angular, and MERN), integrating security principles. Knowledge of best practices for application security and prevention of common vulnerabilities (XSS, SQL injection, CSRF)." 
-        : "Développement avec Python, Java, et fullstack (Django, Angular et MERN), en intégrant les principes de sécurité. Connaissance des bonnes pratiques de sécurisation des applications et prévention des vulnérabilités courantes (XSS, SQL injection, CSRF)."}
+        {lang === "en" ? "Development with Python, Java, and web full-stack frameworks (Django, Angular, and MERN), integrating security principles. Knowledge of best practices for application security and prevention of common vulnerabilities (XSS, SQL injection, CSRF)." 
+        : "Développement avec Python, Java, et web fullstack (Django, Angular et MERN), en intégrant les principes de sécurité. Connaissance des bonnes pratiques de sécurisation des applications et prévention des vulnérabilités courantes (XSS, SQL injection, CSRF)."}
         </p>
     </div>
   </div>
