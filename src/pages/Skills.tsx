@@ -15,8 +15,8 @@ function Skills({ lang }: SkillsProps) {
         {lang === "en" ? "Cybersecurity" : "Cybersécurité"}
       </h3>
       <p className="text-gray-300 text-sm">
-        {lang === "en" ? "Strong knowledge of cybersecurity concepts, cryptography, and best practices for authentication and access control. Familiarity with permission management, firewalls, and threat detection. Understanding of vulnerabilities, common threats, and mitigation strategies." 
-        : "Connaissances solides en concepts de cybersécurité, cryptographie et bonnes pratiques d'authentification et contrôle d'accès. Familiarité avec la gestion des permissions, firewalls et détection de menaces. Compréhension des vulnérabilités, menaces courantes et stratégies de mitigation."}
+        {lang === "en" ? "<Knowledge of cybersecurity concepts, cryptography, and best practices for authentication and access control. Familiarity with permission management, firewalls, and threat detection. Understanding of vulnerabilities, common threats, and mitigation strategies." 
+        : "Connaissances en concepts de cybersécurité, cryptographie et bonnes pratiques d'authentification et contrôle d'accès. Familiarité avec la gestion des permissions, firewalls et détection de menaces. Compréhension des vulnérabilités, menaces courantes et stratégies de mitigation."}
       </p>
     </div>
 
