@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { HashRouter, Routes, Route } from "react-router-dom";
 import Landing from "./pages/Landing";
 import Footer from "./components/layouts/Footer.tsx";
 import ProjectWrapper from "./components/ProjectWrapper.tsx";
@@ -11,7 +11,7 @@ export default function App() {
   };
 
   return (
-      <BrowserRouter>
+      <HashRouter>
       <div className="font-mono bg-[#0b0c10] text-gray-200 min-h-screen flex flex-col">
         <main className="flex-grow">
           <Routes>
@@ -24,6 +24,6 @@ export default function App() {
         </main>
         <Footer />
       </div>
-    </BrowserRouter>
+    </HashRouter>
   );
 }
