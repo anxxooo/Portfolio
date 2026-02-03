@@ -31,9 +31,9 @@ export default function Projects({ lang }: ProjectsProps) {
 
             <div className="absolute inset-0 rounded-xl opacity-0 hover:opacity-100 transition bg-gradient-to-br from-green-400/10 to-transparent pointer-events-none" />
 
-            <h3 className="text-xl font-bold mb-1">{project.title}</h3>
-            <p className="text-sm text-green-400 mb-3">{project.category}</p>
-            <p className="text-gray-400 text-sm mb-4">{project.description}</p>
+            <h3 className="text-xl font-bold mb-1">{project.title[lang]}</h3>
+            <p className="text-sm text-green-400 mb-3">{project.category[lang]}</p>
+            <p className="text-gray-400 text-sm mb-4">{project.shortDescription[lang]}</p>
 
             <div className="flex flex-wrap gap-2">
               {project.techs.map((tech) => (

@@ -1,0 +1,900 @@
+import React from "react";
+export type Project = {
+  title: { en: string; fr: string };
+  category: { en: string; fr: string };
+  shortDescription: { en: string; fr: string };
+  longDescription: { en: string; fr: string };
+  techs: string[];
+  slug: string;
+  github?: string;
+  content?: { en: React.ReactNode; fr: React.ReactNode };
+};
+
+export const projectList: Project[] = [
+ {
+  title: {
+    en: "Secure Client-Server Communication with Smart Cards",
+    fr: "Sécurisation d'un canal Client-Serveur avec cartes à puce"
+  },
+  category: {
+    en: "Cybersecurity / Cryptography",
+    fr: "Cybersécurité / Cryptographie"
+  },
+  shortDescription: {
+    en: "Development of a secure client-server communication channel, integrating RSA, AES, SHA-256, Diffie-Hellman key exchange, and digital signatures.",
+    fr: "Développement d'un canal de communication client-serveur sécurisé basé sur des cartes à puce, intégrant RSA, AES, SHA-256, échange de clés Diffie-Hellman et signatures numériques."
+  },
+  longDescription: {
+    en: "Development of a secure client-server communication channel using smart cards, integrating RSA, AES, SHA-256, Diffie-Hellman key exchange, and digital signatures to ensure confidentiality, authenticity, and integrity of data. Application implemented as a secure e-voting system.",
+    fr: "Développement d'un canal de communication client-serveur sécurisé basé sur des cartes à puce, intégrant RSA, AES, SHA-256, échange de clés Diffie-Hellman et signatures numériques pour garantir la confidentialité, l'authenticité et l'intégrité des données. Application implémentée sous forme de système de vote électronique sécurisé."
+  },
+  techs: [
+    "Java Card",
+    "Java",
+    "RSA",
+    "AES-CBC",
+    "SHA-256",
+    "Diffie-Hellman",
+    "Sockets TCP",
+    "Cryptography",
+    "Digital Signatures",
+    "Client-Server Architecture"
+  ],
+  slug: "secure-smartcard-communication",
+  github: "https://github.com/anxxooo/PRJP-Cartes_a_puce",
+  content: {
+   en: (
+  <div>
+    {/* Objectives */}
+    <section className="mb-6">
+      <h2 className="text-2xl font-semibold mb-2">Objectives</h2>
+      <ul className="list-disc list-inside">
+        <li>Ensure the confidentiality and integrity of exchanged data.</li>
+        <li>Authenticate the card and server using digital signatures.</li>
+        <li>Establish a secure session key via Diffie-Hellman.</li>
+      </ul>
+    </section>
+
+    {/* Cards and Tools */}
+    <section className="mb-6">
+      <h2 className="text-2xl font-semibold mb-2">Cards and Tools Used</h2>
+      <p>
+        We used Java Card ACOSJ cards, capable of storing RSA keys and performing cryptographic operations.
+      </p>
+      <p>
+        On the server side, we implemented a secure TCP/IP channel and a PKI key manager to authenticate each card.
+      </p>
+    </section>
+
+    {/* Channel Security */}
+    <section className="mb-6">
+      <h2 className="text-2xl font-semibold mb-2">Channel Security</h2>
+      <p>
+        The security protocol combines several steps:
+      </p>
+      <ul className="list-disc list-inside">
+        <li>RSA key generation for the card and the server.</li>
+        <li>Secure Diffie-Hellman exchange to create a session key K.</li>
+        <li>Digital signature to authenticate each side and verify message integrity.</li>
+        <li>AES encryption of sensitive data during communication.</li>
+      </ul>
+      <div className="flex flex-col items-center gap-4 my-8">
+        <img
+          src='../../public/diffie-hellman.png'
+          alt="Channel security diagram"
+          className="w-64 h-70 md:w-100 md:h-120 rounded-lg shadow-lg"
+        />
+        <p className="text-xl md:text-2xl font-bold text-white text-center">
+          Diffie-Hellman Exchange + Digital Signature for establishing a secure channel
+        </p>
+      </div>
+    </section>
+
+    {/* Practical Application */}
+    <section className="mb-6">
+      <h2 className="text-2xl font-semibold mb-2">Practical Application</h2>
+      <p>
+        To illustrate the use of the secure channel, we developed an e-voting prototype:
+      </p>
+      <ul className="list-disc list-inside">
+        <li>The card stores the voter's identity and RSA key.</li>
+        <li>Each vote is signed and encrypted before being sent to the server.</li>
+        <li>The server verifies the signature and decrypts the vote to ensure integrity and anonymity.</li>
+      </ul>
+    </section>
+  </div>
+),
+    fr: (
+    <div>
+      {/* Objectifs */}
+      <section className="mb-6">
+        <h2 className="text-2xl font-semibold mb-2">Objectifs</h2>
+        <ul className="list-disc list-inside">
+          <li>Assurer la confidentialité et l'intégrité des données échangées.</li>
+          <li>Authentifier la carte et le serveur grâce à des signatures numériques.</li>
+          <li>Mettre en place une clé de session sécurisée via Diffie-Hellman.</li>
+        </ul>
+      </section>
+
+      {/* Cartes et outils */}
+      <section className="mb-6">
+        <h2 className="text-2xl font-semibold mb-2">Cartes et outils utilisés</h2>
+        <p>
+          Nous avons utilisé des cartes Java Card ACOSJ, capables de stocker des clés RSA et d'exécuter des opérations cryptographiques.
+        </p>
+        <p>
+          Côté serveur, nous avons implémenté un canal TCP/IP sécurisé et un gestionnaire de clés PKI pour authentifier chaque carte.
+        </p>
+      </section>
+
+      {/* Sécurisation du canal */}
+      <section  className="mb-6">
+        <h2 className="text-2xl font-semibold mb-2">Sécurisation du canal</h2>
+        <p>
+          Le protocole de sécurisation combine plusieurs étapes :
+        </p>
+        <ul className="list-disc list-inside">
+          <li>Génération de clés RSA pour la carte et le serveur.</li>
+          <li>Échange sécurisé via Diffie-Hellman pour créer une clé de session K.</li>
+          <li>Signature numérique pour authentifier chaque côté et vérifier l'intégrité des messages.</li>
+          <li>Chiffrement AES des données sensibles pendant la communication.</li>
+        </ul>
+        <div className="flex flex-col items-center gap-4 my-8">
+        <img
+          src='../../public/diffie-hellman.png'
+          alt="Schéma sécurisation canal"
+          className="w-64 h-70 md:w-100 md:h-120  rounded-lg shadow-lg"
+        />
+        <p className="text-xl md:text-2xl font-bold text-white text-center">
+        Echange Diffie-Hellman + Signature numérique pour la création d'un canal sécurisé
+        </p>
+
+        </div>
+      </section>
+
+      {/* Application pratique */}
+      <section className="mb-6">
+        <h2 className="text-2xl font-semibold mb-2">Application pratique</h2>
+        <p>
+          Pour illustrer l'usage du canal sécurisé, nous avons développé un prototype d'e-vote :
+        </p>
+        <ul className="list-disc list-inside">
+          <li>La carte stocke l'identité du votant et sa clé RSA.</li>
+          <li>Chaque vote est signé et chiffré avant d'être envoyé au serveur.</li>
+          <li>Le serveur vérifie la signature et déchiffre le vote pour garantir intégrité et anonymat.</li>
+        </ul>
+      </section>
+    </div>
+  )
+  }
+ },
+{
+  title: {
+    en: "Automated MySQL Deployment with Ansible and Docker",
+    fr: "Déploiement automatisé MySQL avec Ansible et Docker",
+  },
+  category: {
+    en: "DevOps / Automation",
+    fr: "DevOps / Automatisation",
+  },
+  shortDescription: {
+    en: "Learning project to deploy a MySQL container on a remote VM using Ansible and Docker.",
+    fr: "Projet d'apprentissage pour déployer un conteneur MySQL sur une VM distante avec Ansible et Docker.",
+  },
+  longDescription: {
+    en: `This project was first and foremost an opportunity to learn Ansible by automating a real deployment. 
+I set out to deploy a MySQL 8 service inside a Docker container on a remote VM, fully automated from my control node. 
+The project taught me the core principles of infrastructure automation, container management, and idempotent deployments. 
+It also gave me hands-on experience in configuring SSH, writing playbooks, and verifying services across machines.`,
+    fr: `Ce projet était avant tout une occasion d'apprendre Ansible en automatisant un déploiement réel. 
+J'ai déployé un service MySQL 8 dans un conteneur Docker sur une machine distante, entièrement automatisé depuis ma machine de contrôle. 
+Le projet m'a permis de comprendre les principes fondamentaux de l'automatisation d'infrastructure, la gestion de conteneurs et la réalisation de déploiements idempotents. 
+J'ai également acquis une expérience pratique dans la configuration SSH, la rédaction de playbooks et la vérification des services entre machines.`,
+  },
+  techs: ["Ansible", "Docker", "MySQL", "Linux", "SSH"],
+  slug: "mysql-ansible-docker",
+  github: "https://github.com/anxxooo/Deploiement-automatise-Ansible-et-Docker",
+  content: {
+    en: (
+      <>
+        <section className="mb-6">
+        <h2 className="text-2xl font-semibold mb-2">Objectifs</h2>
+        <p>
+          For this project, I aimed to deploy a MySQL service on a remote machine using Docker, while fully leveraging Ansible for automation. 
+          This was primarily a learning exercise to understand how infrastructure as code can simplify repetitive tasks and ensure reliability.
+        </p>
+        </section>
+        <section className="mb-6">
+        <h2 className="text-2xl font-semibold mb-2">Setup</h2>
+        <p>
+          I prepared a control node with Ansible installed and a managed node running Docker. 
+          Secure, passwordless SSH connections were configured between the nodes, allowing Ansible to execute tasks automatically.
+        </p>
+        </section>
+
+        <section className="mb-6">
+        <h2 className="text-2xl font-semibold mb-2">Inventory and Playbook</h2>
+        <p>
+          I created an Ansible inventory listing the managed node and connection details. 
+          The playbook was designed to install Docker if needed, pull the MySQL image, and run it as a container with proper configuration. 
+          Everything was idempotent, so running the playbook multiple times caused no conflicts or redundant changes.
+        </p>
+        </section>
+
+        <section className="mb-6">
+        <h2 className="text-2xl font-semibold mb-2">Execution and Verification</h2>
+        <p>
+          Running the playbook automatically deployed the MySQL container. I verified its status and tested connectivity from the control node and other network machines.
+        </p>
+        </section>
+
+        <section className="mb-6">
+        <h2 className="text-2xl font-semibold mb-2">SSH connection</h2>
+        <img 
+          src="https://github.com/user-attachments/assets/78aba3d1-f7ed-4fa6-ade3-5b72ad023650" 
+          alt="SSH Connection Functional" 
+          style={{ maxWidth: "100%" }}
+        />
+        </section>
+
+        <section className="mb-6">
+        <h2 className="text-2xl font-semibold mb-2">Playbook Execution</h2>
+        <img 
+          src="https://github.com/user-attachments/assets/d2627cfa-0711-4439-81a4-ffea2343a3c9" 
+          alt="Playbook Execution" 
+          style={{ maxWidth: "100%" }}
+        />
+        </section>
+
+        <section className="mb-6">
+        <h2 className="text-2xl font-semibold mb-2">Container Status</h2>
+        <img 
+          src="https://github.com/user-attachments/assets/a42d6bc7-dc5d-447a-82bd-3908046b8791" 
+          alt="MySQL Container Running" 
+          style={{ maxWidth: "100%" }}
+        />
+        </section>
+
+        <section className="mb-6">
+        <h2 className="text-2xl font-semibold mb-2">Service Connectivity</h2>
+        <img 
+          src="https://github.com/user-attachments/assets/27f90710-d82b-422a-9182-ae3e9b787aa2" 
+          alt="MySQL Service Connectivity" 
+          style={{ maxWidth: "100%" }}
+        />
+        </section>
+
+        <section className="mb-6">
+        <h2 className="text-2xl font-semibold mb-2">Learning Outcomes</h2>
+        <p>
+          This project reinforced my understanding of Ansible and Docker in real-world scenarios. 
+          I gained practical experience in automating service deployment, managing containers, and ensuring that deployments are reliable, repeatable, and maintainable.
+        </p>
+        </section>
+      </>
+    ),
+    fr: (
+  <>
+    <section className="mb-6">
+      <h2 className="text-2xl font-semibold mb-2">Objectifs</h2>
+      <p>
+        Pour ce projet, j'ai déployé un service MySQL sur une machine distante en utilisant Docker, tout en exploitant pleinement Ansible pour l'automatisation. 
+        Il s'agissait avant tout d'un projet d'apprentissage pour comprendre comment l'infrastructure en tant que code peut simplifier les tâches répétitives et garantir la fiabilité.
+      </p>
+    </section>
+
+    <section className="mb-6">
+      <h2 className="text-2xl font-semibold mb-2">Configuration</h2>
+      <p>
+        J'ai préparé une machine de contrôle avec Ansible installé et une machine cible avec Docker. 
+        Les connexions SSH sécurisées et sans mot de passe ont été configurées entre les machines, permettant à Ansible d'exécuter les tâches automatiquement.
+      </p>
+    </section>
+
+    <section className="mb-6">
+      <h2 className="text-2xl font-semibold mb-2">Inventaire et Playbook</h2>
+      <p>
+        J'ai créé un inventaire Ansible listant la machine cible et ses paramètres de connexion. 
+        Le playbook a été conçu pour installer Docker si nécessaire, récupérer l'image MySQL et lancer le conteneur avec la configuration appropriée. 
+        Tout a été conçu pour être idempotent, ce qui permet de relancer le playbook plusieurs fois sans provoquer de conflits ni de modifications redondantes.
+      </p>
+    </section>
+
+    <section className="mb-6">
+      <h2 className="text-2xl font-semibold mb-2">Exécution et Vérification</h2>
+      <p>
+        L'exécution du playbook a permis de déployer automatiquement le conteneur MySQL. 
+        J'ai vérifié son état et testé la connectivité depuis la machine de contrôle ainsi que depuis d'autres machines du réseau.
+      </p>
+    </section>
+
+    <section className="mb-6">
+      <h2 className="text-2xl font-semibold mb-2">Connexion SSH</h2>
+      <img 
+        src="https://github.com/user-attachments/assets/78aba3d1-f7ed-4fa6-ade3-5b72ad023650" 
+        alt="Connexion SSH fonctionnelle" 
+        style={{ maxWidth: "100%" }}
+      />
+    </section>
+
+    <section className="mb-6">
+      <h2 className="text-2xl font-semibold mb-2">Exécution du Playbook</h2>
+      <img 
+        src="https://github.com/user-attachments/assets/d2627cfa-0711-4439-81a4-ffea2343a3c9" 
+        alt="Exécution du playbook" 
+        style={{ maxWidth: "100%" }}
+      />
+    </section>
+
+    <section className="mb-6">
+      <h2 className="text-2xl font-semibold mb-2">État du Conteneur</h2>
+      <img 
+        src="https://github.com/user-attachments/assets/a42d6bc7-dc5d-447a-82bd-3908046b8791" 
+        alt="Conteneur MySQL actif" 
+        style={{ maxWidth: "100%" }}
+      />
+    </section>
+
+    <section className="mb-6">
+      <h2 className="text-2xl font-semibold mb-2">Connexion au Service</h2>
+      <img 
+        src="https://github.com/user-attachments/assets/27f90710-d82b-422a-9182-ae3e9b787aa2" 
+        alt="Connexion au service MySQL" 
+        style={{ maxWidth: "100%" }}
+      />
+    </section>
+
+    <section className="mb-6">
+      <h2 className="text-2xl font-semibold mb-2">Compétences acquises</h2>
+      <p>
+        Ce projet m'a permis de renforcer ma compréhension d'Ansible et de Docker dans des scénarios concrets. 
+        J'ai acquis une expérience pratique dans l'automatisation du déploiement de services, la gestion de conteneurs, et la garantie que les déploiements sont fiables, reproductibles et facilement maintenables.
+      </p>
+    </section>
+  </>
+),
+  },
+},
+ {
+  title: {
+    en: "SSH Brute Force Detection - Blue Team Lab",
+    fr: "Détection d'attaque Brute Force SSH - Lab Blue Team",
+  },
+  category: {
+    en: "Cybersecurity / SOC",
+    fr: "Cybersécurité / SOC",
+  },
+  shortDescription: {
+    en: "Educational project simulating an SSH brute force attack, analyzing system logs, creating detection rules with Sigma, and documenting a complete SOC runbook.",
+    fr: "Projet pédagogique simulant une attaque brute force SSH, analysant les logs système, créant des règles de détection avec Sigma et documentant un runbook SOC complet.",
+  },
+  longDescription: {
+    en: `This Blue Team exercise demonstrates the full incident response lifecycle for detecting and mitigating SSH brute force attacks. 
+Using Hydra to simulate realistic attack patterns on a controlled lab environment, I analyzed authentication logs to identify suspicious behavioral patterns. 
+I then developed a Sigma detection rule aligned with MITRE ATT&CK framework (T1110) and documented a comprehensive SOC runbook covering the entire incident lifecycle from detection to remediation. 
+This project reinforced my understanding of threat detection, log analysis, SIEM rule creation, and defensive security operations.`,
+    fr: `Cet exercice Blue Team démontre le cycle complet de réponse à incident pour détecter et atténuer les attaques brute force SSH. 
+En utilisant Hydra pour simuler des schémas d'attaque réalistes dans un environnement de lab contrôlé, j'ai analysé les logs d'authentification pour identifier des comportements suspects. 
+J'ai ensuite développé une règle de détection Sigma alignée avec le framework MITRE ATT&CK (T1110) et documenté un runbook SOC complet couvrant l'ensemble du cycle d'incident, de la détection à la remédiation. 
+Ce projet a renforcé ma compréhension de la détection de menaces, l'analyse de logs, la création de règles SIEM et les opérations de sécurité défensive.`,
+  },
+  techs: ["Linux", "SSH", "Hydra", "Sigma", "MITRE ATT&CK", "Log Analysis", "SOC"],
+  slug: "ssh-bruteforce-detection",
+  content: {
+en: (
+      <>
+        <section className="mb-8">
+          <h2 className="text-2xl font-semibold mb-3 text-green-400">Project Context</h2>
+          <p className="mb-3">
+            This project was conducted in a controlled lab environment for educational purposes with proper authorization. 
+            The goal was to understand the complete Blue Team workflow when responding to SSH brute force attacks.
+          </p>
+          <div className="border-l-4 border-green-400 p-4 rounded shadow-[inset_0_1px_0_rgba(255,255,255,0.05),0_10px_25px_rgba(0,0,0,0.8)] bg-[#111218]">
+            <p className="text-sm font-semibold">Ethics Statement</p>
+            <p className="text-sm text-gray-300">This attack simulation was performed exclusively on a personal lab environment, with authorization, for educational purposes only.</p>
+          </div>
+        </section>
+
+        <section className="mb-8">
+          <h2 className="text-2xl font-semibold mb-3 text-green-400">Phase 1: Attack Simulation</h2>
+          
+          <h3 className="text-xl font-semibold mb-2 mt-4">Normal SSH Connection Baseline</h3>
+          <p className="mb-3">First, I established a baseline by examining logs after a normal SSH authentication:</p>
+          <div className="bg-gray-900 text-green-400 p-4 rounded font-mono text-sm mb-4">
+            <code>sudo tail -n 20 /var/log/auth.log</code>
+          </div>
+          <div className="bg-gray-100 rounded mb-4">
+            <img src='../../public/ssh-connexion-bruteforce.png' alt="Normal SSH logs" className="w-full h-auto" />
+          </div>
+
+          <h3 className="text-xl font-semibold mb-2 mt-6">Brute Force Simulation with Hydra</h3>
+          <p className="mb-3">
+            <strong>Hydra (THC-Hydra)</strong> is a security auditing tool used to test if a service is vulnerable to brute force or password spraying attacks. 
+            It rapidly attempts multiple username/password combinations. I use it here as an attack simulation tool to verify that proper logs are generated and detection mechanisms work correctly.
+          </p>
+
+          <div className="bg-gray-900 text-green-400 p-4 rounded font-mono text-sm mb-4">
+            <code>hydra -l testuser -P pswds.txt ssh://192.168.62.129</code>
+          </div>
+          <p className="mb-3">
+            In this case, the attack found no valid password. Here is an excerpt of the logs generated during the brute force attack simulated with Hydra:
+          </p>
+          <div className="bg-gray-100 rounded mb-4">
+            <img src='../../public/hydra-log-bruteforce.png' alt="Hydra attack logs" className="w-full h-auto" />
+          </div>
+
+          <h3 className="text-xl font-semibold mb-2 mt-6">Attack Behavior Analysis</h3>
+          <div className="grid md:grid-cols-2 gap-4 mb-4">
+            <div className="bg-[#111218] shadow-[inset_0_1px_0_rgba(255,255,255,0.05),0_10px_25px_rgba(0,0,0,0.8)] p-4 rounded">
+              <h4 className="font-semibold mb-2">What Hydra Does</h4>
+              <ul className="list-disc list-inside text-sm space-y-1">
+                <li>Sends numerous SSH attempts</li>
+                <li>Very rapidly</li>
+                <li>From the same IP address</li>
+                <li>Targeting the same user account</li>
+              </ul>
+            </div>
+            <div className="bg-[#111218] shadow-[inset_0_1px_0_rgba(255,255,255,0.05),0_10px_25px_rgba(0,0,0,0.8)] p-4 rounded">
+              <h4 className="font-semibold mb-2">What the Server Sees</h4>
+              <ul className="list-disc list-inside text-sm space-y-1">
+                <li>A sequence of: Failed password</li>
+                <li>Failed password</li>
+                <li>Failed password...</li>
+                <li>The server doesn't know it's Hydra</li>
+                <li>It just logs the failures</li>
+              </ul>
+            </div>
+          </div>
+
+          <h3 className="text-xl font-semibold mb-2 mt-6">SOC Analyst Perspective</h3>
+          <p className="mb-3">
+            "A human doesn't fail 20 passwords in 10 seconds." Therefore: temporal threshold + same IP + same user + many failures = Brute Force attack
+          </p>
+        </section>
+
+        <section className="mb-8">
+          <h2 className="text-2xl font-semibold mb-3 text-green-400">Phase 2: Detection Rule Creation</h2>
+          
+          <h3 className="text-xl font-semibold mb-2">Understanding SSH Brute Force</h3>
+          <p className="mb-3">An SSH brute force attack is not defined by a suspicious IP address, a specific country, or a particular tool, but an abnormal behavior pattern:</p>
+          <ul className="list-disc list-inside space-y-1 mb-4">
+            <li>Multiple "Failed password" events</li>
+            <li>Same target user</li>
+            <li>Same source IP</li>
+            <li>Within a short time period</li>
+          </ul>
+
+          <h3 className="text-xl font-semibold mb-2 mt-6">Detection Logic</h3>
+          <p className="mb-4">The detection condition is set as an alert if the same user experiences 5 SSH failures from the same source IP in less than one minute.</p>
+
+          <h3 className="text-xl font-semibold mb-2 mt-6">Sigma Rule Implementation</h3>
+          <p className="mb-3">
+            <strong>Sigma</strong> is a universal language for detection rules, adaptable by all SIEMs regardless of their native language. 
+            The SIEM interprets this rule and triggers an alert when conditions are met.
+          </p>
+          <p className="mb-3">
+            <strong>MITRE ATT&CK</strong> provides a unified naming convention for attack techniques (here: T1110 - Brute Force).
+          </p>
+
+          <div className="bg-gray-900 text-green-400 p-4 rounded font-mono text-sm overflow-x-auto">
+            <pre>{`title: SSH Brute Force Attempt
+logsource:
+  product: linux
+  service: ssh
+detection:
+  selection:
+    message|contains: "Failed password"
+  condition: selection | count() by src_ip, user >= 5
+level: high
+tags:
+  - attack.T1110  # T1110 - Brute Force (MITRE ATT&CK)`}</pre>
+          </div>
+        </section>
+
+        <section className="mb-8">
+          <h2 className="text-2xl font-semibold mb-3 text-green-400">Phase 3: SOC Runbook</h2>
+
+          <div className="space-y-6">
+              <h3 className="text-xl font-semibold mb-2">1. Identification</h3>
+              <p className="mb-2"><strong>Alert:</strong> SSH Brute Force Attempt (MITRE T1110)</p>
+              <p className="mb-2"><strong>Potential Sources:</strong></p>
+              <ul className="list-disc list-inside mb-3 ml-4">
+                <li>SIEM</li>
+                <li>Firewall logs</li>
+                <li>Honeypot</li>
+                <li>IDS (Intrusion Detection System)</li>
+              </ul>
+              <p className="font-semibold mb-2">Information to Collect:</p>
+              <div className="bg-[#111218] shadow-[inset_0_1px_0_rgba(255,255,255,0.05),0_10px_25px_rgba(0,0,0,0.8)] p-3 rounded">
+                <ul className="space-y-1 text-sm">
+                  <li><code>src_ip</code>: source of attempts</li>
+                  <li><code>user</code>: targeted account</li>
+                  <li><code>timestamp</code>: time window</li>
+                  <li><code>hostname</code>: attacked machine</li>
+                  <li><code>number_of_failures</code>: failure count</li>
+                  <li><code>success</code>: was there a successful login?</li>
+                </ul>
+              </div>
+
+              <h3 className="text-xl font-semibold mb-2">2. Verification</h3>
+              <p className="font-semibold mb-2">Questions to Ask:</p>
+              <ul className="list-disc list-inside mb-3 ml-4 space-y-1">
+                <li>Is this a real attack?</li>
+                <li>Is the IP external and suspicious?</li>
+                <li>Multiple failures in a few seconds?</li>
+                <li>Was there a successful login? (If yes: critical incident)</li>
+                <li>Is the targeted account legitimate? Admin? Service account?</li>
+              </ul>
+              <p className="font-semibold mb-2">Useful Commands (Linux victim):</p>
+              <div className="bg-gray-900 text-green-400 p-3 rounded font-mono text-sm space-y-1">
+                <div><code>sudo tail -n 50 /var/log/auth.log</code></div>
+                <div><code>sudo grep "Failed password" /var/log/auth.log | tail -n 20</code></div>
+                <div><code>sudo grep "Accepted password" /var/log/auth.log | tail -n 20</code></div>
+              </div>
+
+              <h3 className="text-xl font-semibold mb-2">3. Context</h3>
+              <p className="font-semibold mb-2">Elements to Add:</p>
+              <ul className="list-disc list-inside mb-3 ml-4 space-y-1">
+                <li>Is the IP known/recognized?</li>
+                <li>Is it a public IP?</li>
+                <li>Is it an internal IP (VPN)?</li>
+                <li>Is the account protected by MFA?</li>
+              </ul>
+              <p className="font-semibold mb-2">IP Research:</p>
+              <ul className="list-disc list-inside ml-4 space-y-1">
+                <li>Use an IP reputation service</li>
+                <li>Consult Threat Intelligence feeds</li>
+              </ul>
+
+              <h3 className="text-xl font-semibold mb-2">4. Containment</h3>
+              <p className="font-semibold mb-2">Possible Scenarios:</p>
+              
+              <div className="mb-3">
+                <p className="font-semibold text-sm mb-1">If attack from external IP:</p>
+                <p className="text-sm mb-1">Block the IP at firewall/iptables level</p>
+                <div className="bg-gray-900 text-green-400 p-2 rounded font-mono text-xs">
+                  <code>sudo iptables -A INPUT -s &lt;IP&gt; -j DROP</code>
+                </div>
+
+
+              <div className="mb-3">
+                <p className="font-semibold text-sm mb-1">If attack targets specific account:</p>
+                <p className="text-sm mb-1">Lock the account (temporarily)</p>
+                <div className="bg-gray-900 text-green-400 p-2 rounded font-mono text-xs">
+                  <code>sudo usermod -L testuser</code>
+                </div>
+              </div>
+
+              <div>
+                <p className="font-semibold text-sm mb-1">If multiple IPs attacking:</p>
+                <ul className="list-disc list-inside text-sm ml-4">
+                  <li>Enable Fail2Ban</li>
+                  <li>Harden SSH configuration</li>
+                </ul>
+              </div>
+            </div>
+
+              <h3 className="text-xl font-semibold mb-2">5. Eradication (Threat Removal)</h3>
+              <p className="font-semibold mb-2">Recommended Actions:</p>
+              <ul className="list-disc list-inside ml-4 space-y-1">
+                <li>Verify if an intrusion occurred</li>
+                <li>Ensure the attacker didn't create a backdoor</li>
+                <li>Examine <code className="bg-gray-700 px-2 py-1 rounded text-sm">/etc/ssh/sshd_config</code></li>
+              </ul>
+
+              <h3 className="text-xl font-semibold mb-2">6. Remediation</h3>
+              <p className="font-semibold mb-2">Measures to Apply:</p>
+              
+              <div className="mb-3">
+                <p className="font-semibold text-sm mb-1">Disable password authentication, switch to SSH keys:</p>
+                <div className="bg-gray-900 text-green-400 p-2 my-2 rounded font-mono text-xs space-y-1">
+                  <div><code>sudo nano /etc/ssh/sshd_config</code></div>
+                  <div><code># PasswordAuthentication no</code></div>
+                  <div><code>sudo systemctl restart ssh</code></div>
+                </div>
+
+
+              <div>
+                <p className="font-semibold text-sm mb-1">Limit SSH access:</p>
+                <ul className="list-disc list-inside text-sm ml-4">
+                  <li>Allow only specific IPs</li>
+                  <li>Implement VPN requirement</li>
+                </ul>
+              </div>
+            </div>
+
+              <h3 className="text-xl font-semibold mb-2">7. Reporting</h3>
+              <p className="font-semibold mb-2">Report to Produce:</p>
+              <ul className="list-disc list-inside ml-4 space-y-1">
+                <li>Attack date/time</li>
+                <li>Source IP</li>
+                <li>Targeted account</li>
+                <li>Number of failures</li>
+                <li>Containment actions applied</li>
+                <li>Remediation measures</li>
+              </ul>
+              <div className="border-l-4 border-green-400 p-3 rounded shadow-[inset_0_1px_0_rgba(255,255,255,0.05),0_10px_25px_rgba(0,0,0,0.8)] bg-[#111218] mt-3">
+                <p className="text-sm font-semibold mb-1">Conclusion:</p>
+                <p className="text-sm">
+                  The attack was detected by the SSH brute force rule. Attempts were blocked and the SSH service was hardened. 
+                  No successful access was observed.
+                </p>
+              </div>
+            </div>
+
+        </section>
+
+        <section className="mb-8">
+          <h2 className="text-2xl font-semibold mb-3 text-green-400">Learning Outcomes</h2>
+          <p className="mb-3">
+            This project provided hands-on experience with the complete Blue Team incident response workflow. 
+            I learned to identify attack patterns through log analysis, create effective detection rules using industry-standard frameworks (Sigma, MITRE ATT&CK), 
+            and document comprehensive response procedures.
+          </p>
+          <p>
+            The exercise reinforced the importance of behavioral analysis over simple indicators, and demonstrated how proper detection, 
+            containment, and remediation procedures can effectively mitigate security threats.
+          </p>
+        </section>
+      </>
+    ),
+    fr: (
+      <>
+        <section className="mb-8">
+          <h2 className="text-2xl font-semibold mb-3 text-green-400">Contexte du Projet</h2>
+          <p className="mb-3">
+            Ce projet a été réalisé dans un environnement de laboratoire contrôlé à des fins pédagogiques avec les autorisations appropriées. 
+            L'objectif était de comprendre le workflow complet d'une équipe Blue Team lors de la réponse à des attaques brute force SSH.
+          </p>
+          <div className="border-l-4 border-green-400 p-4 rounded shadow-[inset_0_1px_0_rgba(255,255,255,0.05),0_10px_25px_rgba(0,0,0,0.8)] bg-[#111218]">
+            <p className="text-sm font-semibold">Déclaration Éthique</p>
+            <p className="text-sm text-gray-300">Cette simulation d'attaque a été réalisée exclusivement sur un environnement de lab personnel, avec autorisation, à des fins pédagogiques uniquement.</p>
+          </div>
+        </section>
+
+        <section className="mb-8">
+          <h2 className="text-2xl font-semibold mb-3 text-green-400">Phase 1 : Simulation d'Attaque</h2>
+          
+          <h3 className="text-xl font-semibold mb-2 mt-4">Référence de Connexion SSH Normale</h3>
+          <p className="mb-3">D'abord, j'ai établi une référence en examinant les logs après une authentification SSH normale :</p>
+          <div className="bg-gray-900 text-green-400 p-4 rounded font-mono text-sm mb-4">
+            <code>sudo tail -n 20 /var/log/auth.log</code>
+          </div>
+          <div className="bg-gray-100 rounded mb-4">
+            <img src='../../public/ssh-connexion-bruteforce.png' alt="Logs SSH normaux" className="w-full h-auto" />
+          </div>
+
+          <h3 className="text-xl font-semibold mb-2 mt-6">Simulation Brute Force avec Hydra</h3>
+          <p className="mb-3">
+            <strong>Hydra (THC-Hydra)</strong> est un outil d'audit de sécurité utilisé pour tester si un service est vulnérable aux attaques par force brute ou password spraying. 
+            Il essaie rapidement de multiples combinaisons utilisateur/mot de passe. Je l'utilise ici comme outil de simulation d'attaque pour vérifier que les logs appropriés sont générés et que les mécanismes de détection fonctionnent correctement.
+          </p>
+
+          <div className="bg-gray-900 text-green-400 p-4 rounded font-mono text-sm mb-4">
+            <code>hydra -l testuser -P pswds.txt ssh://192.168.62.129</code>
+          </div>
+          <p className="mb-3">
+            L'attaque dans ce cas n'a trouvé aucun mot de passe valide. Voici un extrait des logs générés pendant l'attaque brute force simulée avec Hydra :
+          </p>
+          <div className="bg-gray-100 rounded mb-4">
+            <img src='../../public/hydra-log-bruteforce.png' alt="Logs d'attaque Hydra" className="w-full h-auto" />
+          </div>
+
+          <h3 className="text-xl font-semibold mb-2 mt-6">Analyse du Comportement d'Attaque</h3>
+          <div className="grid md:grid-cols-2 gap-4 mb-4">
+            <div className="bg-[#111218] shadow-[inset_0_1px_0_rgba(255,255,255,0.05),0_10px_25px_rgba(0,0,0,0.8)] p-4 rounded">
+              <h4 className="font-semibold mb-2">Ce que fait Hydra</h4>
+              <ul className="list-disc list-inside text-sm space-y-1">
+                <li>Envoie de nombreuses tentatives SSH</li>
+                <li>Très rapidement</li>
+                <li>Depuis la même adresse IP</li>
+                <li>Ciblant le même compte utilisateur</li>
+              </ul>
+            </div>
+            <div className="bg-[#111218] shadow-[inset_0_1px_0_rgba(255,255,255,0.05),0_10px_25px_rgba(0,0,0,0.8)] p-4 rounded">
+              <h4 className="font-semibold mb-2">Ce que voit le Serveur</h4>
+              <ul className="list-disc list-inside text-sm space-y-1">
+                <li>Une séquence de : Failed password</li>
+                <li>Failed password</li>
+                <li>Failed password...</li>
+                <li>Le serveur ne sait pas que c'est Hydra</li>
+                <li>Il enregistre juste les échecs</li>
+              </ul>
+            </div>
+          </div>
+
+          <h3 className="text-xl font-semibold mb-2 mt-6">Perspective de l'Analyste SOC</h3>
+          <p className="mb-3">
+            "Un humain ne rate pas 20 mots de passe en 10 secondes." Par conséquent : seuil temporel + même IP + même utilisateur + nombreux échecs = Attaque Brute Force
+          </p>
+        </section>
+
+        <section className="mb-8">
+          <h2 className="text-2xl font-semibold mb-3 text-green-400">Phase 2 : Création de Règle de Détection</h2>
+          
+          <h3 className="text-xl font-semibold mb-2">Comprendre le Brute Force SSH</h3>
+          <p className="mb-3">Une attaque brute force SSH n'est pas définie par une adresse IP suspecte, un pays spécifique ou un outil particulier, mais un modèle de comportement anormal :</p>
+          <ul className="list-disc list-inside space-y-1 mb-4">
+            <li>Plusieurs événements "Failed password"</li>
+            <li>Même utilisateur cible</li>
+            <li>Même IP source</li>
+            <li>Dans une courte période de temps</li>
+          </ul>
+
+          <h3 className="text-xl font-semibold mb-2 mt-6">Logique de Détection</h3>
+          <p className="mb-4">On pose comme condition de détection une alerte si le même utilisateur subit 5 échecs SSH depuis la même IP source en moins d'une minute.</p>
+
+          <h3 className="text-xl font-semibold mb-2 mt-6">Implémentation de la Règle Sigma</h3>
+          <p className="mb-3">
+            <strong>Sigma</strong> est un langage universel pour les règles de détection, adaptable par tous les SIEM quel que soit leur langage natif. 
+            Le SIEM interprète cette règle et déclenche une alerte lorsque les conditions sont remplies.
+          </p>
+          <p className="mb-3">
+            <strong>MITRE ATT&CK</strong> fournit une convention de nommage unifiée pour les techniques d'attaque (ici : T1110 - Brute Force).
+          </p>
+
+          <div className="bg-gray-900 text-green-400 p-4 rounded font-mono text-sm overflow-x-auto">
+            <pre>{`title: SSH Brute Force Attempt
+logsource:
+  product: linux
+  service: ssh
+detection:
+  selection:
+    message|contains: "Failed password"
+  condition: selection | count() by src_ip, user >= 5
+level: high
+tags:
+  - attack.T1110  # T1110 - Brute Force (MITRE ATT&CK)`}</pre>
+          </div>
+        </section>
+
+        <section className="mb-8">
+          <h2 className="text-2xl font-semibold mb-3 text-green-400">Phase 3 : Runbook SOC</h2>
+
+          <div className="space-y-6">
+              <h3 className="text-xl font-semibold mb-2">1. Identification</h3>
+              <p className="mb-2"><strong>Alerte :</strong> SSH Brute Force Attempt (MITRE T1110)</p>
+              <p className="mb-2"><strong>Sources Possibles :</strong></p>
+              <ul className="list-disc list-inside mb-3 ml-4">
+                <li>SIEM</li>
+                <li>Logs firewall</li>
+                <li>Honeypot</li>
+                <li>IDS (Système de Détection d'Intrusion)</li>
+              </ul>
+              <p className="font-semibold mb-2">Informations à Collecter :</p>
+              <div className="bg-[#111218] shadow-[inset_0_1px_0_rgba(255,255,255,0.05),0_10px_25px_rgba(0,0,0,0.8)] p-3 rounded">
+                <ul className="space-y-1 text-sm">
+                  <li><code>src_ip</code> : origine des tentatives</li>
+                  <li><code>user</code> : compte ciblé</li>
+                  <li><code>timestamp</code> : fenêtre temporelle</li>
+                  <li><code>hostname</code> : machine attaquée</li>
+                  <li><code>number_of_failures</code> : nombre d'échecs</li>
+                  <li><code>success</code> : y a-t-il eu une connexion réussie ?</li>
+                </ul>
+              </div>
+
+              <h3 className="text-xl font-semibold mb-2">2. Vérification </h3>
+              <p className="font-semibold mb-2">Questions à se Poser :</p>
+              <ul className="list-disc list-inside mb-3 ml-4 space-y-1">
+                <li>Est-ce une attaque réelle ?</li>
+                <li>L'IP est-elle externe et suspecte ?</li>
+                <li>Plusieurs échecs en quelques secondes ?</li>
+                <li>Y a-t-il eu une connexion réussie ? (Si oui : incident critique)</li>
+                <li>Le compte ciblé est-il légitime ? Admin ? Compte de service ?</li>
+              </ul>
+              <p className="font-semibold mb-2">Commandes Utiles (Linux victime) :</p>
+              <div className="bg-gray-900 text-green-400 p-3 rounded font-mono text-sm space-y-1">
+                <div><code>sudo tail -n 50 /var/log/auth.log</code></div>
+                <div><code>sudo grep "Failed password" /var/log/auth.log | tail -n 20</code></div>
+                <div><code>sudo grep "Accepted password" /var/log/auth.log | tail -n 20</code></div>
+              </div>
+
+              <h3 className="text-xl font-semibold mb-2">3. Contexte </h3>
+              <p className="font-semibold mb-2">Éléments à Ajouter :</p>
+              <ul className="list-disc list-inside mb-3 ml-4 space-y-1">
+                <li>L'IP est-elle connue/reconnue ?</li>
+                <li>Est-ce une IP publique ?</li>
+                <li>Est-ce une IP interne (VPN) ?</li>
+                <li>Le compte est-il protégé par MFA ?</li>
+              </ul>
+              <p className="font-semibold mb-2">Recherche IP :</p>
+              <ul className="list-disc list-inside ml-4 space-y-1">
+                <li>Utiliser un service de réputation IP</li>
+                <li>Consulter des flux de Threat Intelligence</li>
+              </ul>
+
+              <h3 className="text-xl font-semibold mb-2">4. Confinement</h3>
+              <p className="font-semibold mb-2">Scénarios Possibles :</p>
+              
+              <div className="mb-3">
+                <p className="font-semibold text-sm mb-1">Si l'attaque provient d'une IP externe :</p>
+                <p className="text-sm mb-1">Bloquer l'IP au niveau firewall/iptables</p>
+                <div className="bg-gray-900 text-green-400 p-2 rounded font-mono text-xs">
+                  <code>sudo iptables -A INPUT -s &lt;IP&gt; -j DROP</code>
+                </div>
+
+
+              <div className="mb-3">
+                <p className="font-semibold text-sm mb-1">Si l'attaque cible un compte spécifique :</p>
+                <p className="text-sm mb-1">Verrouiller le compte (temporairement)</p>
+                <div className="bg-gray-900 text-green-400 p-2 rounded font-mono text-xs">
+                  <code>sudo usermod -L testuser</code>
+                </div>
+              </div>
+
+              <div>
+                <p className="font-semibold text-sm mb-1">Si plusieurs IPs attaquent :</p>
+                <ul className="list-disc list-inside text-sm ml-4">
+                  <li>Activer Fail2Ban</li>
+                  <li>Durcir la configuration SSH</li>
+                </ul>
+              </div>
+            </div>
+
+              <h3 className="text-xl font-semibold mb-2">5. Éradication (Suppression de la Menace)</h3>
+              <p className="font-semibold mb-2">Actions Recommandées :</p>
+              <ul className="list-disc list-inside ml-4 space-y-1">
+                <li>Vérifier si une intrusion a eu lieu</li>
+                <li>S'assurer que l'attaquant n'a pas créé de backdoor</li>
+                <li>Examiner <code className="bg-gray-700 px-2 py-1 rounded text-sm">/etc/ssh/sshd_config</code></li>
+              </ul>
+
+              <h3 className="text-xl font-semibold mb-2">6. Remédiation</h3>
+              <p className="font-semibold mb-2">Mesures à Appliquer :</p>
+              
+              <div className="mb-3">
+                <p className="font-semibold text-sm mb-1">Désactiver l'authentification par mot de passe, passer aux clés SSH :</p>
+                <div className="bg-gray-900 text-green-400 p-2 my-2 rounded font-mono text-xs space-y-1">
+                  <div><code>sudo nano /etc/ssh/sshd_config</code></div>
+                  <div><code># PasswordAuthentication no</code></div>
+                  <div><code>sudo systemctl restart ssh</code></div>
+                </div>
+
+
+              <div>
+                <p className="font-semibold text-sm mb-1">Limiter l'accès SSH :</p>
+                <ul className="list-disc list-inside text-sm ml-4">
+                  <li>Autoriser seulement certaines IPs</li>
+                  <li>Mettre en place un VPN obligatoire</li>
+                </ul>
+              </div>
+            </div>
+
+              <h3 className="text-xl font-semibold mb-2">7. Reporting </h3>
+              <p className="font-semibold mb-2">Rapport à Produire :</p>
+              <ul className="list-disc list-inside ml-4 space-y-1">
+                <li>Date/heure de l'attaque</li>
+                <li>IP source</li>
+                <li>Compte ciblé</li>
+                <li>Nombre d'échecs</li>
+                <li>Actions de confinement appliquées</li>
+                <li>Mesures de remédiation</li>
+              </ul>
+              <div className="border-l-4 border-green-400 p-3 rounded shadow-[inset_0_1px_0_rgba(255,255,255,0.05),0_10px_25px_rgba(0,0,0,0.8)] bg-[#111218] mt-3">
+                <p className="text-sm font-semibold mb-1">Conclusion :</p>
+                <p className="text-sm ">
+                  L'attaque a été détectée par la règle SSH brute force. Les tentatives ont été bloquées et le service SSH a été durci. 
+                  Aucun accès réussi n'a été constaté.
+                </p>
+              </div>
+            </div>
+
+        </section>
+
+        <section className="mb-8">
+          <h2 className="text-2xl font-semibold mb-3 text-green-400">Compétences Acquises</h2>
+          <p className="mb-3">
+            Ce projet a fourni une expérience pratique avec le workflow complet de réponse à incident d'une équipe Blue Team. 
+            J'ai appris à identifier des modèles d'attaque par l'analyse de logs, créer des règles de détection efficaces en utilisant des frameworks standards de l'industrie (Sigma, MITRE ATT&CK), 
+            et documenter des procédures de réponse complètes.
+          </p>
+          <p>
+            L'exercice a renforcé l'importance de l'analyse comportementale plutôt que de simples indicateurs, et a démontré comment des procédures appropriées de détection, 
+            de confinement et de remédiation peuvent efficacement atténuer les menaces de sécurité.
+          </p>
+        </section>
+      </>
+    ),
+  },
+}
+];

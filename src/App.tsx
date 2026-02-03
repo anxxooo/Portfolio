@@ -2,8 +2,6 @@ import { useState } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Landing from "./pages/Landing";
 import Footer from "./components/layouts/Footer.tsx";
-import ProjectPage from "./pages/ProjectPage";
-import { projectList } from "./data/projects.ts";
 import ProjectWrapper from "./components/ProjectWrapper.tsx";
 
 export default function App() {

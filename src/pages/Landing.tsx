@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { useRef} from "react";
 
 import Navbar from "../components/layouts/Navbar.tsx";
 import Home from "./Home.tsx";
@@ -12,7 +12,7 @@ interface LandingProps {
   toggleLanguage : ()=>void;
 }
 
-function Landing({ lang, toggleLanguage }: LandingProps, ) {
+function Landing({ lang, toggleLanguage }: LandingProps ) {
   const homeRef = useRef<HTMLElement>(null);
   const projectsRef = useRef<HTMLElement>(null);
   const contactRef = useRef<HTMLElement>(null);

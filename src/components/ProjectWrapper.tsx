@@ -1,6 +1,6 @@
 import { useParams } from "react-router-dom";
 import ProjectPage from "../pages/ProjectPage";
-import { projectList } from "../data/projects";
+import { projectList } from "../data/projects.tsx";
 
 interface WrapperProps {
   lang: "en" | "fr";

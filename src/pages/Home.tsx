@@ -14,7 +14,7 @@ function Home({ lang }: HomeProps) {
       <p className="text-lg md:text-xl text-gray-400 max-w-2xl mb-0">
         {lang === "en"
           ? "Exploring cybersecurity, systems, and DevOps with curiosity and rigor."
-          : "Interessée par la cybersécurité, aux systèmes et au DevOps avec curiosité et rigueur."}
+          : "Explorant la cybersécurité, les systèmes et le DevOps avec curiosité et rigueur."}
       </p>
       </div>
       

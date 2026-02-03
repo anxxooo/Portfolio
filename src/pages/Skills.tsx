@@ -41,7 +41,7 @@ function Skills({ lang }: SkillsProps) {
     </div>
 
     <div className="bg-[#111218] rounded-xl p-6 shadow-[0_0_0_1px_rgba(0,255,128,0.12),0_10px_25px_rgba(0,0,0,0.85)] hover:scale-105 transition-transform">
-      <h3 className="text-xl font-semibold text-yellow-400 mb-2 flex items-center gap-2">
+      <h3 className="text-xl font-semibold text-blue-400 mb-2 flex items-center gap-2">
         {lang === "en" ? "Networks" : "Réseaux"}
       </h3>
       <p className="text-gray-300 text-sm">
@@ -51,12 +51,21 @@ function Skills({ lang }: SkillsProps) {
     </div>
 
     <div className="bg-[#111218] rounded-xl p-6 shadow-[0_0_0_1px_rgba(0,255,128,0.12),0_10px_25px_rgba(0,0,0,0.85)] hover:scale-105 transition-transform">
-      <h3 className="text-xl font-semibold text-red-400 mb-2 flex items-center gap-2">
+      <h3 className="text-xl font-semibold text-purple-400 mb-2 flex items-center gap-2">
         {lang === "en" ? "Development" : "Développement"}
       </h3>
       <p className="text-gray-300 text-sm">
         {lang === "en" ? "Development with Python, Java, and web full-stack frameworks (Django, Angular, and MERN), integrating security principles. Knowledge of best practices for application security and prevention of common vulnerabilities (XSS, SQL injection, CSRF)." 
         : "Développement avec Python, Java, et web fullstack (Django, Angular et MERN), en intégrant les principes de sécurité. Connaissance des bonnes pratiques de sécurisation des applications et prévention des vulnérabilités courantes (XSS, SQL injection, CSRF)."}
+        </p>
+    </div>
+        <div className="bg-[#111218] rounded-xl p-6 shadow-[0_0_0_1px_rgba(0,255,128,0.12),0_10px_25px_rgba(0,0,0,0.85)] hover:scale-105 transition-transform">
+      <h3 className="text-xl font-semibold text-green-400 mb-2 flex items-center gap-2">
+        {lang === "en" ? "Virtualization" : "Virtualisation"}
+      </h3>
+      <p className="text-gray-300 text-sm">
+        {lang === "en" ? "Experience with virtualization technologies such as VMware, VirtualBox, and Docker. Understanding of containerization concepts and best practices for deploying applications in virtualized environments." 
+        : "Expérience avec les technologies de virtualisation telles que VMware, VirtualBox et Docker. Compréhension des concepts de conteneurisation et des bonnes pratiques pour déployer des applications dans des environnements virtualisés."}
         </p>
     </div>
   </div>
