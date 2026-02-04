@@ -1,4 +1,8 @@
 import React from "react";
+import hydra from "../assets/hydra-log-bruteforce.png";
+import diffie from "../assets/diffie-hellman.png";
+import sshlogs from "../assets/ssh-connexion-bruteforce.png";
+
 export type Project = {
   title: { en: string; fr: string };
   category: { en: string; fr: string };
@@ -80,7 +84,7 @@ export const projectList: Project[] = [
       </ul>
       <div className="flex flex-col items-center gap-4 my-8">
         <img
-          src='../../public/diffie-hellman.png'
+          src={diffie}
           alt="Channel security diagram"
           className="w-64 h-70 md:w-100 md:h-120 rounded-lg shadow-lg"
         />
@@ -141,7 +145,7 @@ export const projectList: Project[] = [
         </ul>
         <div className="flex flex-col items-center gap-4 my-8">
         <img
-          src='../../public/diffie-hellman.png'
+          src={diffie}
           alt="Schéma sécurisation canal"
           className="w-64 h-70 md:w-100 md:h-120  rounded-lg shadow-lg"
         />
@@ -404,7 +408,7 @@ en: (
             <code>sudo tail -n 20 /var/log/auth.log</code>
           </div>
           <div className="bg-gray-100 rounded mb-4">
-            <img src='../../public/ssh-connexion-bruteforce.png' alt="Normal SSH logs" className="w-full h-auto" />
+            <img src={sshlogs} alt="Normal SSH logs" className="w-full h-auto" />
           </div>
 
           <h3 className="text-xl font-semibold mb-2 mt-6">Brute Force Simulation with Hydra</h3>
@@ -420,7 +424,7 @@ en: (
             In this case, the attack found no valid password. Here is an excerpt of the logs generated during the brute force attack simulated with Hydra:
           </p>
           <div className="bg-gray-100 rounded mb-4">
-            <img src='../../public/hydra-log-bruteforce.png' alt="Hydra attack logs" className="w-full h-auto" />
+            <img src={hydra} alt="Hydra attack logs" className="w-full h-auto" />
           </div>
 
           <h3 className="text-xl font-semibold mb-2 mt-6">Attack Behavior Analysis</h3>
@@ -661,7 +665,7 @@ tags:
             <code>sudo tail -n 20 /var/log/auth.log</code>
           </div>
           <div className="bg-gray-100 rounded mb-4">
-            <img src='../../public/ssh-connexion-bruteforce.png' alt="Logs SSH normaux" className="w-full h-auto" />
+            <img src={sshlogs} alt="Logs SSH normaux" className="w-full h-auto" />
           </div>
 
           <h3 className="text-xl font-semibold mb-2 mt-6">Simulation Brute Force avec Hydra</h3>
@@ -677,7 +681,7 @@ tags:
             L'attaque dans ce cas n'a trouvé aucun mot de passe valide. Voici un extrait des logs générés pendant l'attaque brute force simulée avec Hydra :
           </p>
           <div className="bg-gray-100 rounded mb-4">
-            <img src='../../public/hydra-log-bruteforce.png' alt="Logs d'attaque Hydra" className="w-full h-auto" />
+            <img src={hydra} alt="Logs d'attaque Hydra" className="w-full h-auto" />
           </div>
 
           <h3 className="text-xl font-semibold mb-2 mt-6">Analyse du Comportement d'Attaque</h3>
