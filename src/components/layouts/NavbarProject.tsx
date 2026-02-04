@@ -21,7 +21,7 @@ function NavbarProject({ lang, toggleLanguage }: NavbarProjectProps) {
           className="font-semibold px-2 py-1 rounded border border-gray-700 hover:bg-gray-800 cursor-pointer transition-colors duration-300"
         >
           <img
-            src={lang === "en" ? frFlag : enFlag}
+            src={lang === "en" ? enFlag : frFlag}
             alt="language"
             className="w-6 h-6"
           />
