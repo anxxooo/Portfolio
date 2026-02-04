@@ -900,5 +900,200 @@ tags:
       </>
     ),
   },
+}, 
+{
+  "title": {
+    "en": "Disk Partitioning and FAT32 Filesystem Analysis",
+    "fr": "Analyse du Partitionnement Disque et du Système de Fichiers FAT32"
+  },
+  "category": {
+    "en": "Systems / Low-Level Programming",
+    "fr": "Systèmes / Programmation Bas Niveau"
+  },
+  "shortDescription": {
+    "en": "Educational project performing low-level analysis of disk partitioning and FAT32 filesystem using C, exploring MBR, boot sector, clusters, and root directory traversal.",
+    "fr": "Projet pédagogique d'analyse bas niveau du partitionnement disque et du système de fichiers FAT32 en C, explorant le MBR, le secteur de boot, les clusters et le parcours du répertoire racine."
+  },
+  "longDescription": {
+    "en": "This project demonstrates hands-on low-level analysis of disk partitioning and the FAT32 filesystem. By accessing a storage device at the binary level, I read and interpreted the Master Boot Record (MBR), identified FAT32 partitions, parsed boot sector data, and explored the root directory structure. The project reinforced understanding of cluster addressing, directory entries, metadata extraction, and recursive traversal without relying on high-level OS tools. It highlights how files are stored on disk and the connection between theoretical filesystem concepts and practical implementation.",
+    "fr": "Ce projet montre une analyse pratique bas niveau du partitionnement disque et du système de fichiers FAT32. En accédant à un périphérique de stockage au niveau binaire, j'ai lu et interprété le Master Boot Record (MBR), identifié les partitions FAT32, analysé le secteur de boot et exploré la structure du répertoire racine. Le projet a renforcé la compréhension de l'adressage par clusters, des entrées de répertoire, de l'extraction des métadonnées et du parcours récursif, sans utiliser d'outils système de haut niveau. Il montre comment les fichiers sont réellement stockés sur le disque et relie théorie et implémentation concrète."
+  },
+  "techs": ["C", "Linux", "MBR", "FAT32", "Low-Level Programming", "Filesystem Analysis", "Binary I/O"],
+  "slug": "mbr-fat32-analysis",
+  "content": {
+    "en": (
+      <>
+        <section className="mb-8">
+          <h2 className="text-2xl font-semibold mb-3 text-green-400">Project Context</h2>
+          <p className="mb-3">
+            This academic lab project aimed to understand how disks are partitioned and how the FAT32 filesystem works internally.
+            The analysis was performed in C, using direct binary access to the storage device to explore its structures without relying on high-level OS commands.
+          </p>
+        </section>
+
+        <section className="mb-8">
+          <h2 className="text-2xl font-semibold mb-3 text-green-400">Phase 1: Reading the Master Boot Record (MBR)</h2>
+          <p className="mb-3">
+            The program reads the first 512 bytes of the disk, corresponding to the MBR. 
+            The MBR contains the bootloader code, the partition table (4 entries), and a signature (0xAA55).
+          </p>
+          <p className="mb-3">
+            Each partition entry is parsed to extract:
+          </p>
+          <ul className="list-disc list-inside mb-4 ml-4 space-y-1">
+            <li>Partition type</li>
+            <li>Start LBA address</li>
+            <li>Partition size</li>
+          </ul>
+          <p className="mb-3">Only partitions of type FAT32 are further analyzed.</p>
+        </section>
+
+        <section className="mb-8">
+          <h2 className="text-2xl font-semibold mb-3 text-green-400">Phase 2: FAT32 Boot Sector Analysis</h2>
+          <p className="mb-3">
+            Once a FAT32 partition is detected, its boot sector is read. This sector contains essential filesystem parameters:
+          </p>
+          <ul className="list-disc list-inside mb-4 ml-4 space-y-1">
+            <li>Bytes per sector</li>
+            <li>Sectors per cluster</li>
+            <li>Reserved sectors</li>
+            <li>FAT size</li>
+            <li>Root cluster number</li>
+          </ul>
+          <p className="mb-3">
+            These values are crucial to calculate the actual LBA addresses of data clusters and directories.
+          </p>
+        </section>
+
+        <section className="mb-8">
+          <h2 className="text-2xl font-semibold mb-3 text-green-400">Phase 3: Cluster Addressing and Root Directory</h2>
+          <p className="mb-3">
+            Using boot sector information, the program calculates:
+          </p>
+          <ul className="list-disc list-inside mb-4 ml-4 space-y-1">
+            <li>LBA of the data area</li>
+            <li>LBA of the root cluster</li>
+            <li>Mapping of cluster numbers to disk addresses</li>
+          </ul>
+          <p className="mb-3">
+            The root directory is read cluster by cluster. Each 32-byte entry is interpreted to extract:
+          </p>
+          <ul className="list-disc list-inside mb-4 ml-4 space-y-1">
+            <li>File or directory name (short 8.3 and long LFN)</li>
+            <li>File type</li>
+            <li>File size</li>
+            <li>First cluster number</li>
+            <li>LBA address on disk</li>
+          </ul>
+        </section>
+
+        <section className="mb-8">
+          <h2 className="text-2xl font-semibold mb-3 text-green-400">Phase 4: Recursive Directory Traversal</h2>
+          <p className="mb-3">
+            Detected directories are stored for later exploration. The program recursively parses subdirectories, allowing navigation of the full FAT32 hierarchy.
+            This demonstrates a concrete understanding of filesystem structure, cluster linking, and metadata management.
+          </p>
+        </section>
+
+        <section className="mb-8">
+          <h2 className="text-2xl font-semibold mb-3 text-green-400">Learning Outcomes</h2>
+          <p className="mb-3">
+            - Hands-on understanding of disk partitioning and MBR structure.<br/>
+            - Detailed knowledge of FAT32 filesystem layout and cluster addressing.<br/>
+            - Ability to extract file metadata and traverse directories programmatically.<br/>
+            - Experience with binary file I/O and memory structure manipulation in C.<br/>
+            - Bridging theory and practical implementation of low-level systems programming.
+          </p>
+        </section>
+      </>
+    ),
+    "fr": (
+      <>
+        <section className="mb-8">
+          <h2 className="text-2xl font-semibold mb-3 text-green-400">Contexte du Projet</h2>
+          <p className="mb-3">
+            Ce TP académique avait pour objectif de comprendre le partitionnement des disques et le fonctionnement interne du système de fichiers FAT32.
+            L'analyse a été réalisée en C, en accédant directement au périphérique de stockage pour explorer ses structures sans utiliser d'outils système de haut niveau.
+          </p>
+        </section>
+
+        <section className="mb-8">
+          <h2 className="text-2xl font-semibold mb-3 text-green-400">Phase 1 : Lecture du Master Boot Record (MBR)</h2>
+          <p className="mb-3">
+            Le programme lit les 512 premiers octets du disque, correspondant au MBR.
+            Le MBR contient le code d'amorçage, la table de 4 partitions et une signature (0xAA55).
+          </p>
+          <p className="mb-3">Chaque entrée de partition est analysée pour extraire :</p>
+          <ul className="list-disc list-inside mb-4 ml-4 space-y-1">
+            <li>Type de partition</li>
+            <li>Adresse LBA de début</li>
+            <li>Taille de la partition</li>
+          </ul>
+          <p className="mb-3">Seules les partitions de type FAT32 sont analysées plus en détail.</p>
+        </section>
+
+        <section className="mb-8">
+          <h2 className="text-2xl font-semibold mb-3 text-green-400">Phase 2 : Analyse du Secteur de Boot FAT32</h2>
+          <p className="mb-3">
+            Une fois la partition FAT32 détectée, le secteur de boot est lu. Il contient les paramètres fondamentaux du système de fichiers :
+          </p>
+          <ul className="list-disc list-inside mb-4 ml-4 space-y-1">
+            <li>Taille d'un secteur</li>
+            <li>Nombre de secteurs par cluster</li>
+            <li>Nombre de secteurs réservés</li>
+            <li>Taille de la FAT</li>
+            <li>Numéro du cluster racine</li>
+          </ul>
+          <p className="mb-3">
+            Ces informations sont indispensables pour calculer les adresses LBA réelles des clusters de données et des répertoires.
+          </p>
+        </section>
+
+        <section className="mb-8">
+          <h2 className="text-2xl font-semibold mb-3 text-green-400">Phase 3 : Adressage des Clusters et Répertoire Racine</h2>
+          <p className="mb-3">
+            À partir du secteur de boot, le programme calcule :
+          </p>
+          <ul className="list-disc list-inside mb-4 ml-4 space-y-1">
+            <li>LBA du début de la zone de données</li>
+            <li>LBA du cluster racine</li>
+            <li>Correspondance entre numéro de cluster et adresse disque réelle</li>
+          </ul>
+          <p className="mb-3">
+            Le répertoire racine est ensuite lu cluster par cluster. Chaque entrée de 32 octets est interprétée pour extraire :
+          </p>
+          <ul className="list-disc list-inside mb-4 ml-4 space-y-1">
+            <li>Nom du fichier ou répertoire (nom court 8.3 et nom long LFN)</li>
+            <li>Type (fichier ou répertoire)</li>
+            <li>Taille du fichier</li>
+            <li>Numéro du premier cluster</li>
+            <li>Adresse LBA correspondante</li>
+          </ul>
+        </section>
+
+        <section className="mb-8">
+          <h2 className="text-2xl font-semibold mb-3 text-green-400">Phase 4 : Parcours Récursif des Répertoires</h2>
+          <p className="mb-3">
+            Les répertoires détectés sont stockés pour exploration ultérieure. Le programme parcourt récursivement les sous-répertoires, permettant une navigation complète de l'arborescence FAT32.
+            Cela montre une compréhension concrète de la structure du système de fichiers, des liens de clusters et de la gestion des métadonnées.
+          </p>
+        </section>
+
+        <section className="mb-8">
+          <h2 className="text-2xl font-semibold mb-3 text-green-400">Compétences Acquises</h2>
+          <p className="mb-3">
+            - Compréhension pratique du partitionnement disque et de la structure MBR.<br/>
+            - Connaissance détaillée de la disposition FAT32 et de l'adressage par clusters.<br/>
+            - Extraction de métadonnées et parcours programmatique des répertoires.<br/>
+            - Expérience en lecture binaire et manipulation de structures mémoire en C.<br/>
+            - Capacité à relier théorie des systèmes de fichiers et implémentation concrète.
+          </p>
+        </section>
+      </>
+    )
+  },
+  github:"https://github.com/anxxooo/Fat32-file-system.git"
 }
+
+
 ];

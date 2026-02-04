@@ -16,10 +16,7 @@ function About({ lang }: AboutProps) {
     <h2 className="mx-20 text-3xl md:text-6xl font-mono font-bold text-white text-center md:text-left">
       {lang === "en" ? "About me" : "À propos de moi"}
     </h2>
-    <div>
-      {lang == "en" ? <div className=" hidden md:block mx-20 bg-[#e5e5e5] w-40 h-1 rounded "></div>
-      : <div className="hidden md:block mx-20 bg-[#e5e5e5] w-80 h-1 rounded "></div>}
-    </div>
+
     
     <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
 

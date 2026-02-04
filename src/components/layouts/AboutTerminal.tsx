@@ -16,21 +16,24 @@ function AboutTerminal({ lang }: TerminalProps) {
       <div className="pl-4">
         <div>
            {lang === "en"
-          ? <p>
-            Computer Science undergraduate student, I thrive in areas related to 
-            <span className="text-green-400"> cybersecurity</span>, 
-            <span className="text-blue-400"> systems</span>, and 
-            <span className="text-purple-400"> DevOps</span>. Throughout my studies, I have explored software development and data science, but I am particularly passionate about system security and infrastructure optimization. 
-            Curious and motivated, I enjoy understanding how technologies work, the challenges of cybersecurity, and improving them through my projects.
-            </p>
-          : <p>
-            Étudiante en Licence Informatique, je m'épanouis dans tout ce qui touche à la 
-            <span className="text-green-400"> cybersécurité</span>, aux 
-            <span className="text-blue-400"> systèmes</span> et au 
-            <span className="text-purple-400"> DevOps</span>. Au cours de mon parcours, j'ai exploré le développement logiciel et la science des données, mais je suis particulièrement passionnée par la sécurité des systèmes et l'optimisation des infrastructures. 
-            Curieuse et motivée, j'aime comprendre le fonctionnement des technologies, les enjeux de la sécurité informatique et les améliorer à travers mes projets.
-            </p>
-          }
+  ? <p>
+    Computer Science undergraduate student, I enjoy exploring areas such as 
+    <span className="text-green-400"> cybersecurity</span>, 
+    <span className="text-blue-400"> systems</span>, and 
+    <span className="text-purple-400"> DevOps</span>. 
+    Throughout my studies, I have gained experience in software development and data science, while also developing a strong interest in system security and infrastructure optimization. 
+    Curious and motivated, I enjoy understanding how technologies work and building practical solutions, whether through software projects or security experiments.
+  </p>
+  : <p>
+    Étudiante en Licence Informatique, je m'intéresse à des domaines tels que la 
+    <span className="text-green-400"> cybersécurité</span>, les 
+    <span className="text-blue-400"> systèmes</span> et le 
+    <span className="text-purple-400"> DevOps</span>. 
+    Au cours de mon parcours, j'ai acquis de l'expérience en développement logiciel et en science des données, tout en développant un intérêt marqué pour la sécurité des systèmes et l'optimisation des infrastructures. 
+    Curieuse et motivée, j'aime comprendre le fonctionnement des technologies et construire des solutions concrètes, que ce soit à travers des projets logiciels ou des expériences en sécurité.
+  </p>
+}
+
 
         </div>
         <div>

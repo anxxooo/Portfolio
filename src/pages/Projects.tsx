@@ -18,6 +18,10 @@ export default function Projects({ lang }: ProjectsProps) {
       <h2 className="text-4xl md:text-6xl font-bold text-white text-center m-12">
         {lang === "en" ? "Projects" : "Projets"}
       </h2>
+      <p className="text-xl md:text-xl font-bold text-white text-center ">
+        {lang === "en" ? "Still learning, these projects reflect my early explorations and growth in the field." 
+        : "Encore en phase d'apprentissage, ces projets illustrent mes premières explorations et ma progression dans le domaine."}
+      </p>
 
       <div
         className="flex gap-6 overflow-x-auto overflow-y-hidden snap-x snap-mandatory px-6 py-8 hide-scrollbar"
