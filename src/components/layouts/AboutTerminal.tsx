@@ -5,7 +5,8 @@ interface TerminalProps {
 function AboutTerminal({ lang }: TerminalProps) {
   return (
     <section className="relative rounded-xl
-    p-8 max-w-3xl mx-auto my-16 text-gray-200 font-mono
+    p-8 max-w-3xl mx-0 md:mx-auto
+    my-16 text-gray-200 font-mono
     bg-[#111218] rounded-xl shadow-[0_0_0_1px_rgba(0,255,128,0.12),0_20px_40px_rgba(0,0,0,0.85)]">
       <div className="flex items-center gap-2 mb-4">
         <span className="text-green-400">$</span>

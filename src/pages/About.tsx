@@ -11,7 +11,7 @@ function About({ lang }: AboutProps) {
     <div className="absolute inset-0 bg-gradient-to-r from-green-500 via-blue-500 to-purple-500 opacity-10 animate-pulse-slow pointer-events-none"></div>
     <div className="absolute bottom-0 left-0 w-full h-24 bg-gradient-to-t from-[#0b0c10] to-transparent pointer-events-none"></div>
     
-    <div className="w-full max-w-6xl mx-0  my-10 px-6">
+    <div className="w-full max-w-6xl mx-0  my-10 px-0 md:px-6">
 
     <h2 className="mx-20 text-3xl md:text-6xl font-mono font-bold text-white text-center md:text-left">
       {lang === "en" ? "About me" : "À propos de moi"}
@@ -52,25 +52,3 @@ function About({ lang }: AboutProps) {
 };
 
 export default About;
-
-{/*
-          <div className="flex flex-wrap justify-center md:justify-start gap-3 mt-4">
-            {[
-              "Python",
-              "Linux",
-              "Docker",
-              "Kubernetes",
-              "React",
-              "Tailwind",
-              "Git",
-              "Sécurité",
-            ].map((skill) => (
-              <span
-                key={skill}
-                className="px-3 py-1 bg-[#1f2024] text-green-400 rounded-md hover:shadow-lg hover:shadow-green-400 transition cursor-default"
-              >
-                {skill}
-              </span>
-            ))}
-          </div>*/
-        }
