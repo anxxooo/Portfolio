@@ -100,8 +100,6 @@ function Navbar({ refs, lang, toggleLanguage}: NavbarProps) {
           >
             {lang === "en" ? "Contact" : "Contact"}
           </button>
-
-
         </div>
         )}
     </nav>

