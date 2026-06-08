@@ -28,7 +28,7 @@ function Contact({ lang }: ContactProps) {
     
     <div className="bg-[#111218] rounded-xl p-6 shadow-[0_0_0_1px_rgba(0,255,128,0.12),0_10px_25px_rgba(0,0,0,0.85)] hover:scale-105 transition-transform flex items-center gap-4">
       <span className="text-green-400 text-2xl">📍</span>
-      <p className="text-gray-300 font-mono text-sm">Lille (mobilité IDF)</p>
+      <p className="text-gray-300 font-mono text-sm">Lille</p>
     </div>
 
     
